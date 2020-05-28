@@ -1,0 +1,16 @@
+tbl_kas
+-kas_id
+-kas_jenis
+-kas_date
+-kas_keterangan
+-kas_kode
+-kas_total
+
+tbl_rekap
+-kas_id
+-kas_jenis
+-kas_date
+-kas_keterangan
+-kas_kode
+-kas_total
+-kas_debet
