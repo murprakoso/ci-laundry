@@ -8,14 +8,14 @@ class Kas_masuk extends CI_Controller
         parent::__construct();
         error_reporting(0);
         is_logged_in();
-        $this->load->model('Kas_model', 'kas_model');
+        $this->load->model('Kasmasuk_model', 'kasmasuk_model');
         $this->load->model('Rekap_model', 'rekap_model');
     }
 
     public function index()
     {
         $data['title'] = 'Kas Masuk';
-        $data['kasmasuk'] = $this->kas_model->get_all_kasmasuk();
+        $data['kasmasuk'] = $this->kasmasuk_model->getAllKasMasuk();
         $data['footer'] = $this->load->view('footer', '', TRUE);
         $this->load->view('header', $data);
         $this->load->view('v_kas_masuk', $data);
@@ -29,14 +29,13 @@ class Kas_masuk extends CI_Controller
         $total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
 
         $data = [
-            'kas_jenis' => 1,
             'kas_banyaknya' => $banyaknya,
             'kas_keterangan' => $keterangan,
             'kas_kode' => date('dmy') . '-' . $kode, //gabung kode dan tanggal
             'kas_total' => $total
         ];
 
-        $this->kas_model->insert_kas($data);
+        $this->kasmasuk_model->insertKas($data);
         $this->_insertRekap();
         // $this->session->set_flashdata('success', 'Data berhasil ditambahkan!');
         // redirect('kas-masuk');
@@ -52,20 +51,19 @@ class Kas_masuk extends CI_Controller
         $total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
 
         $data = [
-            'kas_jenis' => 1,
             'kas_banyaknya' => $banyaknya,
             'kas_keterangan' => $keterangan,
             'kas_kode' => $kode1 . '-' . $kode, //gabung kode dan tanggal dari database
             'kas_total' => $total,
         ];
-        $this->kas_model->update_kas($data, $kas_id);
+        $this->kasmasuk_model->updateKas($data, $kas_id);
         $this->session->set_flashdata('success', 'Data berhasil diubah!');
         redirect('kas-masuk');
     }
 
     public function hapus($kas_id)
     {
-        $this->kas_model->hapus_kas($kas_id);
+        $this->kasmasuk_model->hapusKas($kas_id);
         $this->session->set_flashdata('success', 'Data berhasil dihapus!');
         redirect('kas-masuk');
     }
@@ -75,7 +73,7 @@ class Kas_masuk extends CI_Controller
     {
         $kas_id = $this->input->post('kas_id', TRUE);
         if (!empty($kas_id)) {
-            $this->kas_model->delete($kas_id);
+            $this->kasmasuk_model->delete($kas_id);
             $this->session->set_flashdata('success', 'Data berhasil dihapus!');
             redirect('kas-masuk');
         } else {
