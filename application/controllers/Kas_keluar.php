@@ -8,14 +8,14 @@ class Kas_keluar extends CI_Controller
         parent::__construct();
         error_reporting(0);
         is_logged_in();
-        $this->load->model('Kas_model', 'kas_model');
+        $this->load->model('Kaskeluar_model', 'kaskeluar_model');
         $this->load->model('Rekap_model', 'rekap_model');
     }
 
     public function index()
     {
         $data['title'] = 'Kas Keluar';
-        $data['kaskeluar'] = $this->kas_model->get_all_kaskeluar();
+        $data['kaskeluar'] = $this->kaskeluar_model->getAllKasKeluar();
         $data['footer'] = $this->load->view('footer', '', TRUE);
         $this->load->view('header', $data);
         $this->load->view('v_kas_keluar', $data);
@@ -29,13 +29,12 @@ class Kas_keluar extends CI_Controller
         $total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
 
         $data = [
-            'kas_jenis' => 2,
             'kas_banyaknya' => $banyaknya,
             'kas_keterangan' => $keterangan,
             'kas_kode' => date('dmy') . '-' . $kode, //gabung kode dan tanggal
             'kas_total' => $total
         ];
-        $this->kas_model->insert_kas($data);
+        $this->kaskeluar_model->insertKas($data);
         $this->_insertRekap();
         // $this->session->set_flashdata('success', 'Data berhasil ditambahkan!');
         // redirect('kas-keluar');
@@ -51,30 +50,29 @@ class Kas_keluar extends CI_Controller
         $total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
 
         $data = [
-            'kas_jenis' => 2,
             'kas_banyaknya' => $banyaknya,
             'kas_keterangan' => $keterangan,
             'kas_kode' => $kode1 . '-' . $kode, //gabung kode dan tanggal dari database
             'kas_total' => $total,
         ];
-        $this->kas_model->update_kas($data, $kas_id);
+        $this->kaskeluar_model->updateKas($data, $kas_id);
         $this->session->set_flashdata('success', 'Data berhasil diubah!');
         redirect('kas-keluar');
     }
 
     public function hapus($kas_id)
     {
-        $this->kas_model->hapus_kas($kas_id);
+        $this->kaskeluar_model->hapusKas($kas_id);
         $this->session->set_flashdata('success', 'Data berhasil dihapus!');
         redirect('kas-keluar');
     }
 
     // hapus data dari checkbox
-    public function hapus_kas()
+    public function hapus_Kas()
     {
         $kas_id = $this->input->post('kas_id', TRUE);
         if (!empty($kas_id)) {
-            $this->kas_model->delete($kas_id);
+            $this->kaskeluar_model->delete($kas_id);
             $this->session->set_flashdata('success', 'Data berhasil dihapus!');
             redirect('kas-keluar');
         } else {
