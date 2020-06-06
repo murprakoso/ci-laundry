@@ -2,8 +2,8 @@
 -- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 02 Bulan Mei 2020 pada 21.20
+-- Host: localhost
+-- Waktu pembuatan: 06 Jun 2020 pada 10.29
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -18,18 +18,17 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_laundry`
+-- Database: `ci_laundry`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kas`
+-- Struktur dari tabel `tbl_kas_keluar`
 --
 
-CREATE TABLE `tbl_kas` (
+CREATE TABLE `tbl_kas_keluar` (
   `kas_id` bigint(20) NOT NULL,
-  `kas_jenis` enum('1','2') DEFAULT NULL COMMENT '1=KasMasuk,2=KasKeluar',
   `kas_date` datetime DEFAULT current_timestamp(),
   `kas_banyaknya` int(11) DEFAULT NULL,
   `kas_keterangan` varchar(200) DEFAULT NULL,
@@ -38,17 +37,40 @@ CREATE TABLE `tbl_kas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_kas`
+-- Dumping data untuk tabel `tbl_kas_keluar`
 --
 
-INSERT INTO `tbl_kas` (`kas_id`, `kas_jenis`, `kas_date`, `kas_banyaknya`, `kas_keterangan`, `kas_kode`, `kas_total`) VALUES
-(37, '1', '2020-04-23 23:25:58', 5, 'Liberty', '230420-333', '30000'),
-(38, '1', '2020-04-23 23:26:24', 2, 'Samsudin', '230420-333', '5000'),
-(39, '1', '2020-03-19 17:48:15', 3, 'Keterangan 3', '240420-445', '30000'),
-(46, '1', '2020-04-24 23:43:57', 4, 'Keterangan 4', '240420-334', '40000'),
-(47, '1', '2020-04-28 15:08:00', 3, 'lkadjfalksdj', '280420-765', '20000'),
-(48, '2', '2020-04-28 15:10:06', 2, 'lakjdflk', '280420-345', '20000'),
-(49, '2', '2020-04-28 15:10:31', 1, 'alkdjsfkl', '280420-222', '5000');
+INSERT INTO `tbl_kas_keluar` (`kas_id`, `kas_date`, `kas_banyaknya`, `kas_keterangan`, `kas_kode`, `kas_total`) VALUES
+(37, '2020-04-23 23:25:58', 5, 'Liberty', '230420-333', '30000'),
+(39, '2020-03-19 17:48:15', 3, 'Keterangan 3', '240420-445', '30000'),
+(50, '2020-06-06 15:23:07', 10, 'Ketarangan kas keluar', '060620-231', '10000'),
+(51, '2020-06-06 15:26:23', 10, 'Data baru', '060620-335', '40000');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `tbl_kas_masuk`
+--
+
+CREATE TABLE `tbl_kas_masuk` (
+  `kas_id` bigint(20) NOT NULL,
+  `kas_date` datetime DEFAULT current_timestamp(),
+  `kas_banyaknya` int(11) DEFAULT NULL,
+  `kas_keterangan` varchar(200) DEFAULT NULL,
+  `kas_kode` varchar(100) DEFAULT NULL,
+  `kas_total` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `tbl_kas_masuk`
+--
+
+INSERT INTO `tbl_kas_masuk` (`kas_id`, `kas_date`, `kas_banyaknya`, `kas_keterangan`, `kas_kode`, `kas_total`) VALUES
+(38, '2020-04-23 23:26:24', 2, 'Samsudin', '230420-333', '5000'),
+(46, '2020-04-24 23:43:57', 4, 'Keterangan 4', '240420-334', '40000'),
+(47, '2020-04-28 15:08:00', 3, 'lkadjfalksdj', '280420-765', '20000'),
+(48, '2020-04-28 15:10:06', 2, 'lakjdflk', '280420-345', '20000'),
+(50, '2020-06-06 15:11:24', 10, 'Kas masuk lama', '060620-457', '55000');
 
 -- --------------------------------------------------------
 
@@ -78,7 +100,11 @@ INSERT INTO `tbl_kas_rekap` (`rekap_id`, `rekap_jenis`, `rekap_date`, `rekap_ban
 (45, '1', '2020-04-24 23:43:57', 4, 'Keterangan 4', '240420-334', '40000', '105000'),
 (46, '1', '2020-04-28 15:08:00', 3, 'lkadjfalksdj', '280420-765', '20000', '125000'),
 (47, '2', '2020-04-28 15:10:06', 2, 'lakjdflk', '280420-345', '20000', '20000'),
-(48, '2', '2020-04-28 15:10:31', 1, 'alkdjsfkl', '280420-222', '5000', '25000');
+(48, '2', '2020-04-28 15:10:31', 1, 'alkdjsfkl', '280420-222', '5000', '25000'),
+(49, '1', '2020-06-06 15:11:24', 5, 'Kas masuk baru', '060620-456', '50000', '175000'),
+(50, '2', '2020-06-06 15:23:07', 5, 'Keterangan', '060620-331', '50000', '75000'),
+(51, '2', '2020-06-06 15:26:23', 10, 'Data baru', '060620-335', '40000', '115000'),
+(52, '2', '2020-06-06 15:26:52', 20, 'Tambah baru', '060620-221', '40000', '155000');
 
 -- --------------------------------------------------------
 
@@ -111,9 +137,15 @@ INSERT INTO `tbl_user` (`user_id`, `user_fullname`, `user_name`, `user_email`, `
 --
 
 --
--- Indeks untuk tabel `tbl_kas`
+-- Indeks untuk tabel `tbl_kas_keluar`
 --
-ALTER TABLE `tbl_kas`
+ALTER TABLE `tbl_kas_keluar`
+  ADD PRIMARY KEY (`kas_id`);
+
+--
+-- Indeks untuk tabel `tbl_kas_masuk`
+--
+ALTER TABLE `tbl_kas_masuk`
   ADD PRIMARY KEY (`kas_id`);
 
 --
@@ -134,16 +166,22 @@ ALTER TABLE `tbl_user`
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kas`
+-- AUTO_INCREMENT untuk tabel `tbl_kas_keluar`
 --
-ALTER TABLE `tbl_kas`
-  MODIFY `kas_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+ALTER TABLE `tbl_kas_keluar`
+  MODIFY `kas_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT untuk tabel `tbl_kas_masuk`
+--
+ALTER TABLE `tbl_kas_masuk`
+  MODIFY `kas_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_kas_rekap`
 --
 ALTER TABLE `tbl_kas_rekap`
-  MODIFY `rekap_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `rekap_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
