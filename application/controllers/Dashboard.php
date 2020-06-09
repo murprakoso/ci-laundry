@@ -8,15 +8,16 @@ class Dashboard extends CI_Controller
         parent::__construct();
         error_reporting(0);
         is_logged_in();
-        $this->load->model('Kas_model', 'kas_model');
+        $this->load->model('Kasmasuk_model', 'kasmasuk_model'); // panggil model kas masuk
+        $this->load->model('Kaskeluar_model', 'kaskeluar_model'); // panggil model kas keluar
         $this->load->model('Rekap_model', 'rekap_model');
     }
 
     public function index()
     {
         $data = [
-            'kasmasuk' => $this->kas_model->get_all_kasmasuk(),
-            'kaskeluar' => $this->kas_model->get_all_kaskeluar(),
+            'kasmasuk' => $this->kasmasuk_model->getAllKasMasuk(), //panggil fungsi select semua kas masuk
+            'kaskeluar' => $this->kaskeluar_model->getAllKasKeluar(), //panggil fungsi select semua kas keluar
             'title' => 'Dashboard'
         ];
         $data['footer'] = $this->load->view('footer', '', TRUE);
