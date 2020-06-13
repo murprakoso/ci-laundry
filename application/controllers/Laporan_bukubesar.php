@@ -6,9 +6,9 @@ class Laporan_bukubesar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        // error_reporting(0);
+        error_reporting(0);
         is_logged_in();
-        // $this->load->model('Kasmasuk_model', 'kasmasuk_model');
+        is_admin();
         $this->load->model('Rekap_model', 'rekap_model');
     }
 
