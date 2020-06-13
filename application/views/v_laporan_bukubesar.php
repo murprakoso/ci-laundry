@@ -22,7 +22,7 @@
                                     <div class="card-body">
                                         <p class="font-weight-bold">Laporan Buku Besar Per-Bulan</p>
                                         <hr>
-                                        <form action="./laporan/pdf-data-jurnal-umum.php" target="_blank" method="post">
+                                        <form action="<?= base_url('laporan_bukubesar/cetak_per_bulan'); ?>" target="_blank" method="post">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -56,7 +56,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group d-flex mt-5">
-                                                <button type="submit" name="cetak_laporan_jurnal_umum_perbulan" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
+                                                <button type="submit" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
                                                     <i class="fa fa-print"></i> CETAK LAPORAN
                                                 </button>
                                             </div>
@@ -73,7 +73,7 @@
                                     <div class="card-body">
                                         <p class="font-weight-bold">Laporan Buku Besar Per-Periode</p>
                                         <hr>
-                                        <form action="./laporan/pdf-data-jurnal-umum.php" target="_blank" method="post">
+                                        <form action="<?= base_url('laporan_bukubesar/cetak_per_periode'); ?>" target="_blank" method="post">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -87,7 +87,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group d-flex mt-5">
-                                                <button type="submit" name="cetak_laporan_jurnal_umum_perbulan" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
+                                                <button type="submit" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
                                                     <i class="fa fa-print"></i> CETAK LAPORAN
                                                 </button>
                                             </div>

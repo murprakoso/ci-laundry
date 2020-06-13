@@ -25,12 +25,12 @@ class Rekap_model extends CI_Model
         $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE month(rekap_date)='$bulan' AND year(rekap_date)='$tahun' AND rekap_jenis='1'");
         return $query;
     }
-
     public function cariRekapMasukPerPeriode($tglAwal, $tglAkhir)
     {
         $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE rekap_date BETWEEN '$tglAwal' AND '$tglAkhir' AND rekap_jenis='1'");
         return $query;
     }
+
     // REKAP KELUAR
     public function cariDataRekapKeluar($bulan, $tahun)
     {
@@ -42,6 +42,19 @@ class Rekap_model extends CI_Model
         $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE rekap_date BETWEEN '$tglAwal' AND '$tglAkhir' AND rekap_jenis='2'");
         return $query;
     }
+
+    // BUKU BESAR
+    public function cariRekapBukuBesarPerBulan($bulan, $tahun)
+    {
+        $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE month(rekap_date)='$bulan' AND year(rekap_date)='$tahun'");
+        return $query;
+    }
+    public function cariRekapBukuBesarPerPeriode($tglAwal, $tglAkhir)
+    {
+        $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE rekap_date BETWEEN '$tglAwal' AND '$tglAkhir'");
+        return $query;
+    }
+    // 
 
     public function cari_data_rekapkeluar($bulan, $tahun)
     {
