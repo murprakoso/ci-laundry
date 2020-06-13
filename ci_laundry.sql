@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 06 Jun 2020 pada 10.29
+-- Waktu pembuatan: 13 Jun 2020 pada 13.05
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -81,7 +81,7 @@ INSERT INTO `tbl_kas_masuk` (`kas_id`, `kas_date`, `kas_banyaknya`, `kas_keteran
 CREATE TABLE `tbl_kas_rekap` (
   `rekap_id` bigint(20) NOT NULL,
   `rekap_jenis` enum('1','2') DEFAULT NULL COMMENT '1=KasMasuk,2=KasKeluar',
-  `rekap_date` datetime DEFAULT current_timestamp(),
+  `rekap_date` date DEFAULT current_timestamp(),
   `rekap_banyaknya` int(11) DEFAULT NULL,
   `rekap_keterangan` varchar(200) DEFAULT NULL,
   `rekap_kode` varchar(100) DEFAULT NULL,
@@ -94,17 +94,17 @@ CREATE TABLE `tbl_kas_rekap` (
 --
 
 INSERT INTO `tbl_kas_rekap` (`rekap_id`, `rekap_jenis`, `rekap_date`, `rekap_banyaknya`, `rekap_keterangan`, `rekap_kode`, `rekap_total`, `rekap_debit`) VALUES
-(38, '1', '2020-04-23 23:25:58', 5, 'Liberty', '230420-333', '30000', '30000'),
-(39, '1', '2020-04-23 23:26:24', 2, 'Samsudin', '230420-333', '5000', '35000'),
-(40, '1', '2020-03-19 17:48:15', 3, 'Keterangan 2', '240420-445', '30000', '65000'),
-(45, '1', '2020-04-24 23:43:57', 4, 'Keterangan 4', '240420-334', '40000', '105000'),
-(46, '1', '2020-04-28 15:08:00', 3, 'lkadjfalksdj', '280420-765', '20000', '125000'),
-(47, '2', '2020-04-28 15:10:06', 2, 'lakjdflk', '280420-345', '20000', '20000'),
-(48, '2', '2020-04-28 15:10:31', 1, 'alkdjsfkl', '280420-222', '5000', '25000'),
-(49, '1', '2020-06-06 15:11:24', 5, 'Kas masuk baru', '060620-456', '50000', '175000'),
-(50, '2', '2020-06-06 15:23:07', 5, 'Keterangan', '060620-331', '50000', '75000'),
-(51, '2', '2020-06-06 15:26:23', 10, 'Data baru', '060620-335', '40000', '115000'),
-(52, '2', '2020-06-06 15:26:52', 20, 'Tambah baru', '060620-221', '40000', '155000');
+(38, '1', '2020-04-23', 5, 'Liberty', '230420-333', '30000', '30000'),
+(39, '1', '2020-04-23', 2, 'Samsudin', '230420-333', '5000', '35000'),
+(40, '1', '2020-03-19', 3, 'Keterangan 2', '240420-445', '30000', '65000'),
+(45, '1', '2020-04-24', 4, 'Keterangan 4', '240420-334', '40000', '105000'),
+(46, '1', '2020-04-28', 3, 'lkadjfalksdj', '280420-765', '20000', '125000'),
+(47, '2', '2020-04-28', 2, 'lakjdflk', '280420-345', '20000', '20000'),
+(48, '2', '2020-04-28', 1, 'alkdjsfkl', '280420-222', '5000', '25000'),
+(49, '1', '2020-06-06', 5, 'Kas masuk baru', '060620-456', '50000', '175000'),
+(50, '2', '2020-06-06', 5, 'Keterangan', '060620-331', '50000', '75000'),
+(51, '2', '2020-06-06', 10, 'Data baru', '060620-335', '40000', '115000'),
+(52, '2', '2020-06-06', 20, 'Tambah baru', '060620-221', '40000', '155000');
 
 -- --------------------------------------------------------
 

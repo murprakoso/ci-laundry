@@ -22,7 +22,7 @@
                                     <div class="card-body">
                                         <p class="font-weight-bold">Laporan Kas Keluar Per-Bulan</p>
                                         <hr>
-                                        <form action="./laporan/pdf-data-jurnal-umum.php" target="_blank" method="post">
+                                        <form action="<?= base_url('laporan_kaskeluar/cetak_per_bulan'); ?>" target="_blank" method="post">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-6">
@@ -56,7 +56,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group d-flex mt-5">
-                                                <button type="submit" name="cetak_laporan_jurnal_umum_perbulan" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
+                                                <button type="submit" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
                                                     <i class="fa fa-print"></i> CETAK LAPORAN
                                                 </button>
                                             </div>
@@ -65,6 +65,38 @@
                                 </div>
                                 <!--  -->
                             </div>
+
+                            <!-- Periode -->
+                            <div class="col-sm-6">
+                                <!--  -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p class="font-weight-bold">Laporan Kas Keluar Per-Periode</p>
+                                        <hr>
+                                        <form action="<?= base_url('laporan_kaskeluar/cetak_per_periode'); ?>" target="_blank" method="post">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <label for="bulan">Tanggal Awal</label>
+                                                        <input type="date" name="tgl_awal" class="form-control">
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label for="tahun">Tanggal Akhir</label>
+                                                        <input type="date" name="tgl_akhir" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group d-flex mt-5">
+                                                <button type="submit" class="btn btn-sm btn-success mr-2 pl-4 pr-4">
+                                                    <i class="fa fa-print"></i> CETAK LAPORAN
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                            <!-- /.Periode -->
                         </div>
                     </div>
                 </div>

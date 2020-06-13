@@ -18,12 +18,31 @@ class Rekap_model extends CI_Model
         return $query;
     }
 
+    // REKAP MASUK
     // filter data berdasarkan bulan dan tahun
-    public function cari_data_rekapmasuk($bulan, $tahun)
+    public function cariDataRekapMasuk($bulan, $tahun)
     {
         $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE month(rekap_date)='$bulan' AND year(rekap_date)='$tahun' AND rekap_jenis='1'");
         return $query;
     }
+
+    public function cariRekapMasukPerPeriode($tglAwal, $tglAkhir)
+    {
+        $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE rekap_date BETWEEN '$tglAwal' AND '$tglAkhir' AND rekap_jenis='1'");
+        return $query;
+    }
+    // REKAP KELUAR
+    public function cariDataRekapKeluar($bulan, $tahun)
+    {
+        $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE month(rekap_date)='$bulan' AND year(rekap_date)='$tahun' AND rekap_jenis='2'");
+        return $query;
+    }
+    public function cariRekapKeluarPerPeriode($tglAwal, $tglAkhir)
+    {
+        $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE rekap_date BETWEEN '$tglAwal' AND '$tglAkhir' AND rekap_jenis='2'");
+        return $query;
+    }
+
     public function cari_data_rekapkeluar($bulan, $tahun)
     {
         $query = $this->db->query("SELECT * FROM tbl_kas_rekap WHERE month(rekap_date)='$bulan' AND year(rekap_date)='$tahun' AND rekap_jenis='2'");
