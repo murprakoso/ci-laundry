@@ -52,7 +52,13 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'auth';
 $route['kas-masuk'] = 'kas_masuk';
 $route['kas-keluar'] = 'kas_keluar';
-$route['rekap-penerimaan'] = 'rekap_penerimaan';
-$route['rekap-pengeluaran'] = 'rekap_pengeluaran';
+
+// $route['rekap-penerimaan'] = 'rekap_penerimaan';
+// $route['rekap-pengeluaran'] = 'rekap_pengeluaran';
+
+$route['laporan-kas-masuk'] = 'laporan_kasmasuk';
+$route['laporan-kas-keluar'] = 'laporan_kaskeluar';
+$route['laporan-buku-besar'] = 'laporan_bukubesar';
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

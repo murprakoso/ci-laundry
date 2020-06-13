@@ -19,7 +19,7 @@
                         <button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData"><i class="fa fa-plus"></i> Tambah</button>
                     </div>
                     <!-- Tombol Print & Export -->
-                    <a id="tt"></a>
+                    <!-- <a id="tt"></a> -->
                 </div>
             </div>
         </div>

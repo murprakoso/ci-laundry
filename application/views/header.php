@@ -95,12 +95,22 @@
                                     </ul>
                                 </li>
                                 <?php if ($row['user_level'] == 1) : ?>
-                                    <li class="<?= ($this->router->fetch_class() == 'post') ? 'current-page' : ''; ?>"><a><i class="fa fa-folder-open"></i> Data Rekapitulasi </a>
+                                    <!-- <li class="<?= ($this->router->fetch_class() == 'post') ? 'current-page' : ''; ?>"><a><i class="fa fa-folder-open"></i> Data Rekapitulasi </a>
                                         <ul class="nav child_menu">
                                             <li><a href="<?= base_url('rekap-penerimaan'); ?>">Rekap Penerimaan Kas</a></li>
                                             <li><a href="<?= base_url('rekap-pengeluaran'); ?>">Rekap Pengeluaran Kas</a></li>
                                         </ul>
+                                    </li> -->
+
+                                    <!-- Laporan -->
+                                    <li class="<?= ($this->router->fetch_class() == 'post') ? 'current-page' : ''; ?>"><a><i class="fa fa-folder-open"></i> Laporan</a>
+                                        <ul class="nav child_menu">
+                                            <li><a href="<?= base_url('laporan-kas-masuk'); ?>">Rekap Kas Masuk</a></li>
+                                            <li><a href="<?= base_url('laporan-kas-keluar'); ?>">Rekap Kas Keluar</a></li>
+                                            <li><a href="<?= base_url('laporan-buku-besar'); ?>">Laporan Buku Besar</a></li>
+                                        </ul>
                                     </li>
+
                                     <li><a><i class="fa fa-cog"></i> Pengaturan </a>
                                         <ul class="nav child_menu">
                                             <li><a href="<?= base_url('akun'); ?>">Akun </a></li>
