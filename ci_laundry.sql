@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 13 Jun 2020 pada 13.05
+-- Waktu pembuatan: 14 Jun 2020 pada 10.51
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -127,10 +127,11 @@ CREATE TABLE `tbl_user` (
 --
 
 INSERT INTO `tbl_user` (`user_id`, `user_fullname`, `user_name`, `user_email`, `user_password`, `user_level`, `user_photo`) VALUES
-(1, 'M Fikri', 'admin', 'admin@gmail.com', '$2y$10$hkQwMsds/5GfMG.coqkeoekmQ/UgoCqXf03HOs.ADCrNrORR1Curi', '1', 'bc0c855e8cffbf89b8c314e92fe9a836.jpg'),
+(1, 'Pecinta Kaffein', 'admin', 'admin@gmail.com', '$2y$10$hkQwMsds/5GfMG.coqkeoekmQ/UgoCqXf03HOs.ADCrNrORR1Curi', '1', 'bc0c855e8cffbf89b8c314e92fe9a836.jpg'),
 (2, 'M Joko', 'user', 'user@gmail.com', '$2y$10$Gr/4ZrcUdEO/tbIvnNGOy.Ypz2HMOR5aHab4E6tqgxH0nbm0qCeGW', '2', 'ba89275e813a385ad9ccd54e6ea94f59.jpg'),
 (3, 'M Joko f', 'joko22', 'user@gmail.com', '$2y$10$xwO70.ztmyI2Mq2sNWfgtuBzH4Lb39mNC6JrWWUT/oNsPsgrmKn/2', '2', NULL),
-(7, 'Ronal D', 'ronal', 'ronal@gmail.com', '$2y$10$uB/26PUvtGIkX7qPqnTHD.7l6UO.CC435w5SKPWZdlIFUfIvMHkZK', '2', '20aa1e3a715e29b81181f5f6168e7146.jpg');
+(7, 'Ronal D', 'ronal', 'ronal@gmail.com', '$2y$10$uB/26PUvtGIkX7qPqnTHD.7l6UO.CC435w5SKPWZdlIFUfIvMHkZK', '2', '20aa1e3a715e29b81181f5f6168e7146.jpg'),
+(8, 'mur prakoso', 'murprakoso', 'mur@gmail.com', '$2y$10$RWiKL.QF41.ec5ftJW1mFukFDjNg5/EwuileG6WpS168HDn9Omtxi', '2', '8a80bd2475e45e0d4af3f643cf4e86b8.png');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +188,7 @@ ALTER TABLE `tbl_kas_rekap`
 -- AUTO_INCREMENT untuk tabel `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

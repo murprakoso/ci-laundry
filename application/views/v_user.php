@@ -198,20 +198,6 @@ foreach ($user->result() as $row) :
 
 <?php echo $footer; ?>
 
-<script type="text/javascript">
-    function readURLA(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                $('#fotoproduk')
-                    .attr('src', e.target.result);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 
 <script type="text/javascript">
     $(document).ready(function() {

@@ -137,7 +137,7 @@
 </script>
 
 <!-- Fungsi export -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(function() {
         // var header1 = document.getElementById('example1').innerHTML;
         // console.log(header1);
@@ -216,7 +216,7 @@
         // datefilter mulai
         // datefilter end
     })
-</script>
+</script> -->
 
 
 </body>
