@@ -1,6 +1,8 @@
 <?php
-// echo view('layout/head');
+// **
+// * bungkus semua layout 
+// *
 $this->load->view('layout/header');
-// echo view('layout/sidebar');
+$this->load->view('layout/sidebar');
 $this->load->view('layout/content');
 $this->load->view('layout/footer');

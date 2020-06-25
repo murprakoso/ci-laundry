@@ -6,13 +6,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h3 class="m-0" id="titleprint">Kas Keluar <?php
-															$var = "AB001";
-
-															for ($i = 0; $i < 10; $i++) {
-																echo $var . "\n";
-																$var++;
-															}; ?></h3>
+				<h3 class="m-0" id="titleprint">Kas Keluar </h3>
 			</div>
 			<div class="col-md-6 m-0">
 				<div class="kanan mt-2">
@@ -72,9 +66,9 @@
 													<td><?= $row->kas_kode; ?></td>
 													<td><?= rupiah($row->kas_total); ?></td>
 													<td class="text__16">
-														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kas_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil"></span></a>
+														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kas_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
 
-														<a href="<?= base_url('kas_keluar/hapus/' . $row->kas_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash"></span></a>
+														<a href="<?= base_url('kas_keluar/hapus/' . $row->kas_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
 													</td>
 												</tr>
 											<?php endforeach; ?>
