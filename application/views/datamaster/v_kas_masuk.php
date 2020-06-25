@@ -12,11 +12,11 @@
 				<div class="kanan mt-2">
 					<div class="btn-group">
 						<div id="deleteall">
-							<button type="button" form="form-delete" id="btn-delete" class="btn btn-sm btn-danger btn_flat text-white mr-2">
+							<button type="button" form="form-delete" id="btn-delete" class="btn btn-sm btn-danger btn_flat text-white">
 								<i class="fa fa-trash"></i>
 							</button>
 						</div>
-						<button type=" button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData"><i class="fa fa-plus"></i> Tambah</button>
+						<!-- <button type=" button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData ml-2"><i class="fa fa-plus"></i> Tambah</button> -->
 					</div>
 					<!-- Tombol Print & Export -->
 					<!-- <a id="tt"></a> -->
@@ -41,9 +41,12 @@
 												</th>
 												<th>No.</th>
 												<th>Tanggal</th>
-												<th>Banyaknya</th>
+												<th>Berat</th>
+												<th>Nama Pelanggan</th>
+												<th>No HP</th>
 												<th>Keterangan</th>
-												<th>Kode</th>
+												<th>Petugas</th>
+												<th>Harga</th>
 												<th>Total</th>
 												<th>
 													<i class="fa fa-cog tidakprint"></i>
@@ -60,13 +63,18 @@
 														<input type="checkbox" class="check-item" form="form-delete" name="kas_id[]" value="<?= $row->kas_id; ?>">
 													</td>
 													<td style="width: 5px;"><?= ++$no; ?></td>
-													<td><?= date('d-M-Y', strtotime($row->kas_date)); ?></td>
-													<td style="width: 8px;"><?= $row->kas_banyaknya; ?></td>
-													<td style="min-width: 150px;"><?= $row->kas_keterangan; ?></td>
-													<td><?= $row->kas_kode; ?></td>
-													<td><?= rupiah($row->kas_total); ?></td>
-													<td class="text__16 tidakprint">
-														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kas_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
+													<td><?= date('d-M-Y', strtotime($row->tanggal)); ?></td>
+													<td style="width: 8px;"><?= $row->berat; ?></td>
+													<td style="min-width: 150px;"><?= $row->nama_pelanggan; ?></td>
+													<td><?= $row->telp; ?></td>
+													<td class="text-center">
+														<?= (!empty($row->keterangan) ? $row->keterangan : '-'); ?>
+													</td>
+													<td><?= $row->user_fullname; ?></td>
+													<td><?= rupiah($row->harga); ?></td>
+													<td><?= rupiah($row->total); ?></td>
+													<td class="text__16 tidakprint" style="display: inline-block; min-width: 50px;">
+														<!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kas_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a> -->
 
 														<a href="<?= base_url('kas_masuk/hapus/' . $row->kas_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
 													</td>
@@ -263,5 +271,3 @@ foreach ($kasmasuk->result() as $row) :
 	</form>
 <?php endforeach; ?>
 <!-- /.Modal Ubah -->
-
-<?php echo $footer; ?>

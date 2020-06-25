@@ -16,8 +16,8 @@ class Dashboard extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'kasmasuk' => $this->kasmasuk_model->getAllKasMasuk(), //panggil fungsi select semua kas masuk
-			'kaskeluar' => $this->kaskeluar_model->getAllKasKeluar(), //panggil fungsi select semua kas keluar
+			'kasmasuk' => $this->kasmasuk_model->getKasMasuk(), //panggil fungsi select semua kas masuk
+			'kaskeluar' => $this->kaskeluar_model->getKasKeluar(), //panggil fungsi select semua kas keluar
 			'title' => 'Dashboard',
 			'content' => 'dashboard/v_dashboard'
 		];

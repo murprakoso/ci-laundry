@@ -12,16 +12,18 @@ class Kas_masuk extends CI_Controller
 		$this->load->model('Rekap_model', 'rekap_model');
 	}
 
+
 	public function index()
 	{
 		$data = [
 			'title' => 'Kas Masuk',
 			'content' => 'datamaster/v_kas_masuk'
 		];
-		$data['kasmasuk'] = $this->kasmasuk_model->getAllKasMasuk();
+		$data['kasmasuk'] = $this->kasmasuk_model->getKasMasuk();
 
 		$this->load->view('layout/wrapper', $data);
 	}
+
 
 	public function tambah()
 	{

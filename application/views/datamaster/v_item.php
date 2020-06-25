@@ -115,7 +115,12 @@
 								<label>Harga</label>
 							</div>
 							<div class="col-md-10">
-								<input type="number" class="form-control" name="harga">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Rp.</div>
+									</div>
+									<input type="number" class="form-control" name="harga" min="1">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -126,7 +131,12 @@
 							</div>
 							<div class="col-md-10">
 								<small>*Kosongkan jika tidak ada potongan harga</small>
-								<input type="number" class="form-control" name="diskon" placeholder="(Optional)">
+								<div class="input-group mb-2">
+									<div class="input-group-prepend">
+										<div class="input-group-text">Rp.</div>
+									</div>
+									<input type="number" class="form-control" name="diskon" placeholder="(Optional)" min="1">
+								</div>
 							</div>
 						</div>
 					</div>
@@ -185,7 +195,12 @@
 									<label>Harga</label>
 								</div>
 								<div class="col-md-10">
-									<input type="number" class="form-control" name="harga" value="<?= $row->item_harga; ?>">
+									<div class="input-group mb-2">
+										<div class="input-group-prepend">
+											<div class="input-group-text">Rp.</div>
+										</div>
+										<input type="number" class="form-control" name="harga" value="<?= $row->item_harga; ?>" min="1">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -196,7 +211,12 @@
 								</div>
 								<div class="col-md-10">
 									<small>*Kosongkan jika tidak ada potongan harga</small>
-									<input type="number" class="form-control" name="diskon" placeholder="(Optional)" value="<?= (!empty($row->item_diskon) ? $row->item_diskon : ''); ?>">
+									<div class="input-group mb-2">
+										<div class="input-group-prepend">
+											<div class="input-group-text">Rp.</div>
+										</div>
+										<input type="number" class="form-control" name="diskon" placeholder="(Optional)" value="<?= (!empty($row->item_diskon) ? $row->item_diskon : ''); ?>" min="1">
+									</div>
 								</div>
 							</div>
 						</div>

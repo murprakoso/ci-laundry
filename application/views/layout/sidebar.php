@@ -36,23 +36,23 @@
 								<li>
 									<a href="<?= base_url('dashboard'); ?>"><i class="fa fa-tachometer"></i> Dashboard </a>
 								</li>
-								<li class="<?= ($this->router->fetch_class() == 'post') ? 'current-page' : ''; ?>"><a><i class="fa fa-folder"></i> Data Master </a>
+								<li><a><i class=" fa fa-folder"></i> Data Master </a>
 									<ul class="nav child_menu">
 										<li><a href="<?= base_url('item'); ?>">Item</a></li>
 										<li><a href="<?= base_url('kas-masuk'); ?>">Kas Masuk</a></li>
 										<li><a href="<?= base_url('kas-keluar'); ?>">Kas Keluar</a></li>
 									</ul>
 								</li>
+								<li><a><i class="fa fa-folder-open"></i> Transaksi </a>
+									<ul class="nav child_menu">
+										<li><a href="<?= base_url('transaksi'); ?>">Transaksi Masuk</a></li>
+										<li><a href="<?= base_url('transaksi-selesai'); ?>">Transaksi Selesai</a></li>
+									</ul>
+								</li>
 								<?php if ($row['user_level'] == 1) : ?>
-									<!-- <li class="<?= ($this->router->fetch_class() == 'post') ? 'current-page' : ''; ?>"><a><i class="fa fa-folder-open"></i> Data Rekapitulasi </a>
-                                        <ul class="nav child_menu">
-                                            <li><a href="<?= base_url('rekap-penerimaan'); ?>">Rekap Penerimaan Kas</a></li>
-                                            <li><a href="<?= base_url('rekap-pengeluaran'); ?>">Rekap Pengeluaran Kas</a></li>
-                                        </ul>
-                                    </li> -->
 
 									<!-- Laporan -->
-									<li class="<?= ($this->router->fetch_class() == 'post') ? 'current-page' : ''; ?>"><a><i class="fa fa-folder-open"></i> Laporan</a>
+									<li><a><i class="fa fa-folder-open"></i> Laporan</a>
 										<ul class="nav child_menu">
 											<li><a href="<?= base_url('laporan-kas-masuk'); ?>">Rekap Kas Masuk</a></li>
 											<li><a href="<?= base_url('laporan-kas-keluar'); ?>">Rekap Kas Keluar</a></li>

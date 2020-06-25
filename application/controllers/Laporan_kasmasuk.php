@@ -9,7 +9,7 @@ class Laporan_kasmasuk extends CI_Controller
 		error_reporting(0);
 		is_logged_in();
 		is_admin();
-		$this->load->model('Rekap_model', 'rekap_model');
+		$this->load->model('Kasmasuk_model');
 	}
 
 
@@ -33,7 +33,7 @@ class Laporan_kasmasuk extends CI_Controller
 		$bulan = $this->input->post('bulan');
 		$tahun = $this->input->post('tahun');
 
-		$data['kasmasuk'] = $this->rekap_model->cariDataRekapMasuk($bulan, $tahun);
+		$data['kasmasuk'] = $this->Kasmasuk_model->cariDataRekapMasuk($bulan, $tahun);
 		$data['bulan'] = $bulan;
 		$data['tahun'] = $tahun;
 
@@ -59,7 +59,7 @@ class Laporan_kasmasuk extends CI_Controller
 		$tglAwal = $this->input->post('tgl_awal');
 		$tglAkhir = $this->input->post('tgl_akhir');
 
-		$data['kasmasuk'] = $this->rekap_model->cariRekapMasukPerPeriode($tglAwal, $tglAkhir);
+		$data['kasmasuk'] = $this->Kasmasuk_model->cariRekapMasukPerPeriode($tglAwal, $tglAkhir);
 		$data['tgl_awal'] = $tglAwal;
 		$data['tgl_akhir'] = $tglAkhir;
 

@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Kas_keluar extends CI_Controller
 {
+	public $userId;
 	public function __construct()
 	{
 		parent::__construct();
@@ -10,7 +11,15 @@ class Kas_keluar extends CI_Controller
 		is_logged_in();
 		$this->load->model('Kaskeluar_model', 'kaskeluar_model');
 		$this->load->model('Rekap_model', 'rekap_model');
+
+		// ambil session user
+		if (!empty($this->session->userdata('user_name'))) {
+			$this->userId = $this->session->userdata('user_id');
+		} else {
+			is_logged_in();
+		}
 	}
+
 
 	public function index()
 	{
@@ -18,107 +27,66 @@ class Kas_keluar extends CI_Controller
 			'title' => 'Kas Keluar',
 			'content' => 'datamaster/v_kas_keluar'
 		];
-		$data['kaskeluar'] = $this->kaskeluar_model->getAllKasKeluar();
+		$data['kaskeluar'] = $this->kaskeluar_model->getKasKeluar();
 
 		$this->load->view('layout/wrapper', $data);
 	}
 
-	public function tambah()
+
+	public function save()
 	{
-		$banyaknya = htmlspecialchars($this->input->post('kas_banyaknya', TRUE), ENT_QUOTES);
-		$keterangan = htmlspecialchars($this->input->post('kas_keterangan', TRUE), ENT_QUOTES);
-		$kode = htmlspecialchars($this->input->post('kas_kode', TRUE), ENT_QUOTES);
-		$total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
+		$tanggal = htmlspecialchars($this->input->post('tanggal', TRUE), ENT_QUOTES);
+		$banyaknya = htmlspecialchars($this->input->post('banyaknya', TRUE), ENT_QUOTES);
+		$namaToko = htmlspecialchars($this->input->post('nama_toko', TRUE), ENT_QUOTES);
+		$telp = htmlspecialchars($this->input->post('telp', TRUE), ENT_QUOTES);
+		$keterangan = htmlspecialchars($this->input->post('keterangan', TRUE), ENT_QUOTES);
+		$harga = htmlspecialchars($this->input->post('harga', TRUE), ENT_QUOTES);
 
-		$data = [
-			'kas_banyaknya' => $banyaknya,
-			'kas_keterangan' => $keterangan,
-			'kas_kode' => date('dmy') . '-' . $kode, //gabung kode dan tanggal
-			'kas_total' => $total
-		];
-		$this->kaskeluar_model->insertKas($data);
-		$this->_insertRekap();
-		// $this->session->set_flashdata('success', 'Data berhasil ditambahkan!');
-		// redirect('kas-keluar');
-	}
-
-	public function ubah()
-	{
-		$kas_id = $this->input->post('kas_id', TRUE);
-		$banyaknya = htmlspecialchars($this->input->post('kas_banyaknya', TRUE), ENT_QUOTES);
-		$keterangan = htmlspecialchars($this->input->post('kas_keterangan', TRUE), ENT_QUOTES);
-		$kode1 = htmlspecialchars($this->input->post('kode1', TRUE), ENT_QUOTES);
-		$kode = htmlspecialchars($this->input->post('kas_kode', TRUE), ENT_QUOTES);
-		$total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
-
-		$data = [
-			'kas_banyaknya' => $banyaknya,
-			'kas_keterangan' => $keterangan,
-			'kas_kode' => $kode1 . '-' . $kode, //gabung kode dan tanggal dari database
-			'kas_total' => $total,
-		];
-		$this->kaskeluar_model->updateKas($data, $kas_id);
-		$this->session->set_flashdata('success', 'Data berhasil diubah!');
+		if ($this->kaskeluar_model->insertKas($this->userId, $tanggal, $banyaknya, $namaToko, $telp, $keterangan, $harga)) {
+			$this->session->set_flashdata('success', 'Data berhasil ditambahkan!');
+		}
 		redirect('kas-keluar');
 	}
 
-	public function hapus($kas_id)
+
+	public function update()
 	{
-		$this->kaskeluar_model->hapusKas($kas_id);
-		$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+		$kaskeluarId = $this->input->post('kas_id', TRUE);
+		$tanggal = htmlspecialchars($this->input->post('tanggal', TRUE), ENT_QUOTES);
+		$banyaknya = htmlspecialchars($this->input->post('banyaknya', TRUE), ENT_QUOTES);
+		$namaToko = htmlspecialchars($this->input->post('nama_toko', TRUE), ENT_QUOTES);
+		$telp = htmlspecialchars($this->input->post('telp', TRUE), ENT_QUOTES);
+		$keterangan = htmlspecialchars($this->input->post('keterangan', TRUE), ENT_QUOTES);
+		$harga = htmlspecialchars($this->input->post('harga', TRUE), ENT_QUOTES);
+
+		if ($this->kaskeluar_model->updateKas($this->userId, $tanggal, $banyaknya, $namaToko, $telp, $keterangan, $harga, $kaskeluarId)) {
+			$this->session->set_flashdata('success', 'Data berhasil diubah!');
+		}
+		redirect('kas-keluar');
+	}
+
+
+	public function delete($kaskeluarId)
+	{
+		if ($this->kaskeluar_model->deleteKas($kaskeluarId)) {
+			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+		}
 		redirect('kas-keluar');
 	}
 
 	// hapus data dari checkbox
-	public function hapus_Kas()
+	public function deletes()
 	{
-		$kas_id = $this->input->post('kas_id', TRUE);
-		if (!empty($kas_id)) {
-			$this->kaskeluar_model->delete($kas_id);
-			$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+		$kaskeluarId = $this->input->post('kaskeluar_id', TRUE);
+		if (!empty($kaskeluarId)) {
+			if ($this->kaskeluar_model->deleteMultiple($kaskeluarId)) {
+				$this->session->set_flashdata('success', 'Data berhasil dihapus!');
+			}
 			redirect('kas-keluar');
 		} else {
 			$this->session->set_flashdata('warning', 'Harap pilih data!');
 			redirect('kas-keluar');
 		}
-	}
-
-	// proses memasukan data ke rekap
-	private function _insertRekap()
-	{
-		$banyaknya = htmlspecialchars($this->input->post('kas_banyaknya', TRUE), ENT_QUOTES);
-		$keterangan = htmlspecialchars($this->input->post('kas_keterangan', TRUE), ENT_QUOTES);
-		$kode = htmlspecialchars($this->input->post('kas_kode', TRUE), ENT_QUOTES);
-		$total = htmlspecialchars($this->input->post('kas_total', TRUE), ENT_QUOTES);
-
-		// select 'id terakhir' di tbl rekap
-		$cekRekap = $this->rekap_model->cek_rekapkeluar()->row_array();
-		$rekapID = $cekRekap['rekap_id'];
-
-		// ambil data berdasarkan 'id terakhir'
-		$rekap = $this->db->get_where('tbl_kas_rekap', ['rekap_id' => $rekapID])->row_array();
-		// $rekap['rekap_total'];
-		$rekap['rekap_debit'];
-
-		if (!$rekapID) {
-			$debit = $total;
-		} else {
-			$debit = $total + $rekap['rekap_debit'];
-		}
-
-		// 
-		$data = [
-			'rekap_jenis' => 2,
-			'rekap_banyaknya' => $banyaknya,
-			'rekap_keterangan' => $keterangan,
-			'rekap_kode' => date('dmy') . '-' . $kode, //gabung kode dan tanggal
-			'rekap_total' => $total,
-			'rekap_debit' => $debit
-		];
-
-		$this->rekap_model->insert_rekap($data);
-		$this->session->set_flashdata('success', 'Data berhasil ditambahkan!');
-		redirect('kas-keluar');
 	}
 }
 

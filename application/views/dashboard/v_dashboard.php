@@ -130,31 +130,58 @@
 				</div>
 			<?php endif; ?>
 
-			<!-- <div class="col-md-12 col-sm-12 ">
-                <div class="x_panel">
-                    <div class="col-md-12">
-                        <div class="x_title">
-                            <h2>Dashboard </h2>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <div class="card-box table-responsive">
-                                        <p class="text-muted font-13 m-b-30">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, voluptates, expedita, sed architecto quisquam ea ut molestias illum itaque maiores placeat dolor odio recusandae aliquid optio aut dolorum. Sapiente, laboriosam?
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
+			<div class="col-md-12 col-sm-12 ">
+				<!-- <div class="x_panel">
+					<div class="col-md-12">
+						<div class="x_title">
+							<h2>Dashboard </h2>
+							<div class="clearfix"></div>
+						</div>
+						<div class="x_content">
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="card-box table-responsive">
+										<p class="text-muted font-13 m-b-30">
+											Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quam, voluptates, expedita, sed architecto quisquam ea ut molestias illum itaque maiores placeat dolor odio recusandae aliquid optio aut dolorum. Sapiente, laboriosam?
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-lg-3">
+						<div class="card">
+							<div class="card-body">
+								<p class="font-weight-bold"><i class="fa fa-info-circle"></i> Order</p>
+								<form action="" method="post">
+									<table class="table">
+										<tbody>
+											<tr>
+												<td>Hari ini</td>
+												<td align="right"><b>0</b></td>
+											</tr>
+											<tr>
+												<td>Semua</td>
+												<td align="right"><b>25</b></td>
+											</tr>
+											<tr>
+												<td></td>
+												<td align="right">
+													<button type="submit" name="order" class="btn btn-success">Detail <i class="fa fa-arrow-right"></i></button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 			<!-- col-md-12 -->
 		</div>
 	</div>
 </div>
 <!-- /page content -->
-
-<?php echo $footer; ?>

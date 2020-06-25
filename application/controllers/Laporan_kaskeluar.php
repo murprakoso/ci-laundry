@@ -9,7 +9,7 @@ class Laporan_kaskeluar extends CI_Controller
 		error_reporting(0);
 		is_logged_in();
 		is_admin(0);
-		$this->load->model('Rekap_model', 'rekap_model');
+		$this->load->model('Kaskeluar_model');
 	}
 
 	public function index()
@@ -28,7 +28,7 @@ class Laporan_kaskeluar extends CI_Controller
 		$bulan = $this->input->post('bulan');
 		$tahun = $this->input->post('tahun');
 
-		$data['kaskeluar'] = $this->rekap_model->cariDataRekapKeluar($bulan, $tahun);
+		$data['kaskeluar'] = $this->Kaskeluar_model->cariDataRekapKeluar($bulan, $tahun);
 		$data['bulan'] = $bulan;
 		$data['tahun'] = $tahun;
 
@@ -53,7 +53,7 @@ class Laporan_kaskeluar extends CI_Controller
 		$tglAwal = $this->input->post('tgl_awal');
 		$tglAkhir = $this->input->post('tgl_akhir');
 
-		$data['kaskeluar'] = $this->rekap_model->cariRekapKeluarPerPeriode($tglAwal, $tglAkhir);
+		$data['kaskeluar'] = $this->Kaskeluar_model->cariRekapKeluarPerPeriode($tglAwal, $tglAkhir);
 		$data['tgl_awal'] = $tglAwal;
 		$data['tgl_akhir'] = $tglAkhir;
 

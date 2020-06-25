@@ -195,5 +195,3 @@ foreach ($user->result() as $row) :
 	</form>
 <?php endforeach; ?>
 <!-- /.Modal ubah -->
-
-<!-- <?php echo $footer; ?> -->

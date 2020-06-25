@@ -14,6 +14,14 @@ class Item_model extends CI_Model
 		return $query;
 	}
 
+
+	public function getItemById($itemId)
+	{
+		$query = $this->db->get_where($this->_table, array('item_id' => $itemId));
+		return $query;
+	}
+
+
 	public function insertItem($nama, $tipe, $harga, $diskon)
 	{
 		$data = [
@@ -26,6 +34,8 @@ class Item_model extends CI_Model
 			return true;
 		}
 	}
+
+
 	public function updateItem($nama, $tipe, $harga, $diskon, $itemId)
 	{
 		$data = [
@@ -39,6 +49,7 @@ class Item_model extends CI_Model
 			return true;
 		}
 	}
+
 
 	public function deleteItem($itemId)
 	{
