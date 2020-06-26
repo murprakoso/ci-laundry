@@ -40,9 +40,9 @@
 													<input type="checkbox" class="checkmarkall" id="check-all">
 												</th>
 												<th>No.</th>
-												<th>Tanggal</th>
+												<th class="mw-100">Tanggal</th>
 												<th>Banyaknya</th>
-												<th>Nama Toko</th>
+												<th class="mw-100">Nama Toko</th>
 												<th>No Telp.</th>
 												<th>Keterangan</th>
 												<th>Petugas</th>

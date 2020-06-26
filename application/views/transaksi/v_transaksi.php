@@ -28,11 +28,16 @@
 										<thead>
 											<tr>
 												<th>No.</th>
-												<th>Nama Item</th>
+												<th>Status</th>
+												<th>Pelanggan</th>
+												<th class="mw-150">No Telp.</th>
+												<th>Tanggal</th>
 												<th>Tipe</th>
-												<th>Harga Satuan</th>
-												<th>Harga per (1KG)</th>
-												<th>Potongan Harga</th>
+												<th>Keterangan</th>
+												<th class="mw-150">Harga Satuan</th>
+												<th>Harga</th>
+												<th>Potongan</th>
+												<th>Total</th>
 												<th class="tidakprint">
 													<i class="fa fa-cog"></i>
 												</th>
