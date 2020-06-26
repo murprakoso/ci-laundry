@@ -6540,6 +6540,16 @@ td.mw-50 {
 	min-width: 50px !important;
 }
 
+th.mw-80,
+td.mw-80 {
+	min-width: 80px !important;
+}
+
+th.mw-90,
+td.mw-90 {
+	min-width: 90px !important;
+}
+
 th.mw-100,
 td.mw-100 {
 	min-width: 100px !important;
@@ -6563,6 +6573,11 @@ td.mw-250 {
 th.mw-300,
 td.mw-300 {
 	min-width: 300px !important;
+}
+
+td.pointer,
+th.pointer {
+	cursor: pointer;
 }
 
 /* /.Button export */

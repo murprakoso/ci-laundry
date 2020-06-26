@@ -161,88 +161,61 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	});
 </script>
 
-<!-- Fungsi export -->
-<!-- <script type="text/javascript">
-    $(function() {
-        // var header1 = document.getElementById('example1').innerHTML;
-        // console.log(header1);
-        var judul = $('#titleprint').text();
-        var t = $('#datatable').DataTable();
 
-        t.on('order.dt search.dt print', function() {
-            t.column(1, {
-                search: 'applied',
-                order: 'applied'
-            }).nodes().each(function(cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
+<!-- Form Transaksi tambah -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		var base_url = "<?= base_url(); ?>";
 
-        var buttons = new $.fn.dataTable.Buttons(t, {
-            buttons: [{
-                    extend: 'print',
-                    text: '<i class="fa fa-print"></i> Cetak',
-                    className: 'btn-sm btn-warning btn_flat',
-                    autoPrint: true,
-                    title: judul,
-                    exportOptions: {
-                        columns: ':not(.tidakprint)'
-                    },
+		$('#tipe').on('change', function() {
+			$('#berat').val('').html('');
+			$('#item').val('').html('');
 
-                    customize: function(win) {
-                        $(win.document.body)
-                            .css('font-size', '10pt');
-                        $(win.document.body).find('table')
-                            .addClass('compact')
-                            .css('font-size', 'inherit');
-                        // $(win.document.body).find( 'thead' ).prepend('<div class="header-print">' + $('#dt-header').val() + '</div>');
-                        $(win.document.body).find('h1').addClass('text-center');
-                    }
-                },
-                // { extend : 'colvis', text:'Tampilkan Kolom' },
-                {
-                    extend: 'collection',
-                    text: 'Export',
-                    className: 'btn-sm btn-light btn_flat text-black',
+			var tipe = $(this).children("option:selected").val();
+			// console.log(tipe);
 
-                    buttons: [{
-                            extend: 'copy',
-                            exportOptions: {
-                                columns: ':not(.tidakprint)'
-                            },
-                        },
-                        {
-                            extend: 'csv',
-                            title: judul,
-                            exportOptions: {
-                                columns: ':not(.tidakprint)'
-                            },
-                        },
-                        {
-                            extend: 'excel',
-                            title: judul,
-                            exportOptions: {
-                                columns: ':not(.tidakprint)'
-                            },
-                        },
-                        {
-                            extend: 'pdf',
-                            title: judul,
-                            exportOptions: {
-                                columns: ':not(.tidakprint)'
-                            },
-                        },
+			if (tipe == 2) { // jika tipe == kiloan maka tampilkan form berat
+				$('#berat').append(`
+					<div class="row">
+						<div class="col-md-2">
+							<label>Berat(Kg)</label>
+						</div>
+						<div class="col-md-10">
+							<input type="number" class="form-control" name="berat">
+						</div>
+					</div>
+				`);
+			}
 
-                    ]
-                }
-            ],
 
-        }).container().appendTo($('#tt'));
-        // datefilter mulai
-        // datefilter end
-    })
-</script> -->
+			$.ajax({
+				url: base_url + 'transaksi/getItem',
+				method: 'post',
+				data: {
+					tipe: tipe,
+				},
+				dataType: 'JSON',
 
+				success: function(results) {
+					$('#item').prop("disabled", false);
+					let data = results;
+					// console.log(data);
+
+					$('#item').append(`
+						<option value="">- Pilih jenis item -</option>
+					`);
+					$.each(data, function(i, data) {
+						$('#item').append(`
+					        <option value="` + data.item_id + `">` + data.item_nama + `</option>
+					    `);
+					});
+				}
+			});
+		});
+
+
+	});
+</script>
 
 </body>
 

@@ -49,7 +49,7 @@
 													</td>
 													<td><?= ($row->item_tipe == 1 ?  rupiah($row->item_harga) : '-'); ?></td>
 													<td><?= ($row->item_tipe == 2 ?  rupiah($row->item_harga) : '-'); ?></td>
-													<td><?= (!empty($row->item_diskon) ? $row->item_diskon : '-'); ?></td>
+													<td><?= (!empty($row->item_diskon) ? rupiah($row->item_diskon) : '-'); ?></td>
 													<td class="text__16">
 														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->item_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
 

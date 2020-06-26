@@ -43,11 +43,7 @@
 										<li><a href="<?= base_url('kas-keluar'); ?>">Kas Keluar</a></li>
 									</ul>
 								</li>
-								<li><a><i class="fa fa-folder-open"></i> Transaksi </a>
-									<ul class="nav child_menu">
-										<li><a href="<?= base_url('transaksi'); ?>">Transaksi Masuk</a></li>
-										<li><a href="<?= base_url('transaksi-selesai'); ?>">Transaksi Selesai</a></li>
-									</ul>
+								<li><a href="<?= base_url('transaksi'); ?>"><i class="fa fa-folder-open"></i> Transaksi </a>
 								</li>
 								<?php if ($row['user_level'] == 1) : ?>
 
