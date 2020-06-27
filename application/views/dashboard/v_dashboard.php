@@ -61,15 +61,9 @@
 								<div class="tile-stats">
 									<div class="icon"><i class="fa fa-download"></i>
 									</div>
-									<?php
-									foreach ($debitMasuk->row_array() as $r) {
-										$dM[] = $r['total'];
-									}
-									$total = array_sum($dM);
-									?>
-
+									<!-- tampilkan debit pemasukan  -->
+									<?php $total = $debitMasuk['total']; ?>
 									<div class="count"><?= rupiah($total); ?></div>
-
 									<h4>Debit Pemasukan Bulan <?= date('M'); ?></h3>
 								</div>
 							</div>
@@ -77,8 +71,9 @@
 								<div class="tile-stats">
 									<div class="icon"><i class="fa fa-upload"></i>
 									</div>
-									<div class="count"><?= rupiah(1000); ?></div>
-
+									<!-- tampilkan debit pengeluaran -->
+									<?php $total = $debitKeluar['total']; ?>
+									<div class="count"><?= rupiah($total); ?></div>
 									<h4>Debit Pengeluaran Bulan <?= date('M'); ?></h4>
 								</div>
 							</div>

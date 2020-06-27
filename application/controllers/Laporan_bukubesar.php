@@ -9,7 +9,7 @@ class Laporan_bukubesar extends CI_Controller
 		error_reporting(0);
 		is_logged_in();
 		is_admin();
-		$this->load->model('Rekap_model', 'rekap_model');
+		$this->load->model('Bukubesar_model', 'Bukubesar');
 	}
 
 	public function index()
@@ -32,7 +32,8 @@ class Laporan_bukubesar extends CI_Controller
 		$bulan = $this->input->post('bulan');
 		$tahun = $this->input->post('tahun');
 
-		$data['bukubesar'] = $this->rekap_model->cariRekapBukuBesarPerBulan($bulan, $tahun);
+		$data['debit'] = $this->Bukubesar->getDebitPerBulan($bulan, $tahun);
+		$data['kredit'] = $this->Bukubesar->getKreditPerBulan($bulan, $tahun);
 		$data['bulan'] = $bulan;
 		$data['tahun'] = $tahun;
 
@@ -49,6 +50,8 @@ class Laporan_bukubesar extends CI_Controller
 		ob_end_clean();
 		$this->dompdf->stream("laporan_buku_besar_perbulan.pdf", array('Attachment' => 0));
 	}
+
+
 	public function cetak_per_periode()
 	{
 		$this->load->library('dompdf_gen');
@@ -56,7 +59,8 @@ class Laporan_bukubesar extends CI_Controller
 		$tglAwal = $this->input->post('tgl_awal');
 		$tglAkhir = $this->input->post('tgl_akhir');
 
-		$data['bukubesar'] = $this->rekap_model->cariRekapBukuBesarPerPeriode($tglAwal, $tglAkhir);
+		$data['debit'] = $this->Bukubesar->getDebitPerPeriode($tglAwal, $tglAkhir);
+		$data['kredit'] = $this->Bukubesar->getKreditPerPeriode($tglAwal, $tglAkhir);
 		$data['tgl_awal'] = $tglAwal;
 		$data['tgl_akhir'] = $tglAkhir;
 

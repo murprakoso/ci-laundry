@@ -55,6 +55,11 @@ class Kasmasuk_model extends CI_Model
 		$query = $this->db->query("SELECT * FROM tbl_kas_masuk WHERE tanggal BETWEEN '$tglAwal' AND '$tglAkhir'");
 		return $query;
 	}
+
+	// 
+	// public function cariRekapBukuBesarPerBulan()
+	// {
+	// }
 }
 
 /* End of file Kasmasuk_model.php */

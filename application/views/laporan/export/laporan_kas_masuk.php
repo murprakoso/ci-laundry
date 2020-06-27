@@ -41,6 +41,7 @@
 		<td class="center td-bold">NO.</td>
 		<td class="center td-bold">TANGGAL TRANSAKSI</td>
 		<td class="center td-bold">PELANGGAN</td>
+		<td class="center td-bold">TIPE</td>
 		<td class="center td-bold">BERAT</td>
 		<td class="center td-bold">TOTAL</td>
 	</tr>
@@ -52,7 +53,8 @@
 			<td style="text-align: center;"><?= ++$no; ?></td>
 			<td><?= tgl_indo(date('Y-m-d', strtotime($row->tanggal))); ?></td>
 			<td><?= $row->nama_pelanggan; ?></td>
-			<td><?= $row->berat . '(Kg)'; ?></td>
+			<td><?= ($row->tipe == 1 ? 'Satuan' : 'Kiloan'); ?></td>
+			<td><?= ($row->tipe != 1) ? $row->berat . '(Kg)' : '-'; ?></td>
 			<td><?= rupiah($row->total); ?></td>
 		</tr>
 		<?php
@@ -61,7 +63,7 @@
 		?>
 	<?php endforeach; ?>
 	<tr>
-		<td colspan="3" class="td-bold">TOTAL</td>
+		<td colspan="4" class="td-bold">TOTAL</td>
 		<td class="td-bold"><?= $total1 . '(Kg)'; ?></td>
 		<td class="td-bold"><?= rupiah($total2); ?></td>
 	</tr>

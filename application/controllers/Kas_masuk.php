@@ -9,7 +9,6 @@ class Kas_masuk extends CI_Controller
 		error_reporting(0);
 		is_logged_in();
 		$this->load->model('Kasmasuk_model', 'kasmasuk_model');
-		$this->load->model('Rekap_model', 'rekap_model');
 	}
 
 

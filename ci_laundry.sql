@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 25 Jun 2020 pada 18.09
+-- Waktu pembuatan: 27 Jun 2020 pada 21.18
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -40,9 +40,10 @@ CREATE TABLE `tbl_item` (
 --
 
 INSERT INTO `tbl_item` (`item_id`, `item_nama`, `item_tipe`, `item_harga`, `item_diskon`) VALUES
-(2, 'Celana Jeans', '2', 5000, NULL),
-(6, 'Satuan', '2', 8000, 2000),
-(11, 'Umum', '1', 4000, 0);
+(2, 'Celana Jeans', '2', 5000, 0),
+(11, 'Umum', '1', 4000, NULL),
+(12, 'Umum', '2', 8000, 5000),
+(13, 'Pakaian Kemeja', '1', 2500, NULL);
 
 -- --------------------------------------------------------
 
@@ -70,7 +71,7 @@ INSERT INTO `tbl_kas_keluar` (`kaskeluar_id`, `banyaknya`, `nama_toko`, `telp`, 
 (53, 4, 'Laund Collection', '989898989', 'Bahan pewangii', '2020-06-25', 1, 5000, 20000),
 (57, 30, 'Alfamart', '888888333', 'sabun', '2020-06-26', 2, 2500, 75000),
 (58, 7, 'Toko Serbaguna', '987777777', 'Beli beras', '2020-06-24', 1, 12000, 84000),
-(59, 35, 'Toko Serbaguna 2', '989898333', '', '2020-05-13', 1, 43000, 1505000);
+(59, 10, 'Toko Serbaguna 2', '989898333', '', '2020-05-13', 1, 13500, 135000);
 
 -- --------------------------------------------------------
 
@@ -80,11 +81,12 @@ INSERT INTO `tbl_kas_keluar` (`kaskeluar_id`, `banyaknya`, `nama_toko`, `telp`, 
 
 CREATE TABLE `tbl_kas_masuk` (
   `kasmasuk_id` bigint(20) NOT NULL,
-  `berat` int(11) DEFAULT NULL,
+  `tipe` enum('1','2') DEFAULT NULL COMMENT '1=satuan,2=kiloan',
+  `berat` varchar(11) DEFAULT NULL,
   `nama_pelanggan` varchar(255) DEFAULT NULL,
   `telp` varchar(200) DEFAULT NULL,
   `keterangan` varchar(100) DEFAULT NULL,
-  `tanggal` datetime DEFAULT current_timestamp(),
+  `tanggal` date DEFAULT current_timestamp(),
   `kas_user_id` int(11) DEFAULT NULL,
   `harga` int(20) DEFAULT NULL,
   `total` int(20) DEFAULT NULL
@@ -94,43 +96,11 @@ CREATE TABLE `tbl_kas_masuk` (
 -- Dumping data untuk tabel `tbl_kas_masuk`
 --
 
-INSERT INTO `tbl_kas_masuk` (`kasmasuk_id`, `berat`, `nama_pelanggan`, `telp`, `keterangan`, `tanggal`, `kas_user_id`, `harga`, `total`) VALUES
-(51, 5, 'Reza', '09989898989', NULL, '2020-06-25 19:12:59', 1, 5000, 3000),
-(52, 5, 'Novi', '09989898989', NULL, '2020-06-25 19:12:59', 2, 5000, 8000);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tbl_kas_rekap`
---
-
-CREATE TABLE `tbl_kas_rekap` (
-  `rekap_id` bigint(20) NOT NULL,
-  `rekap_jenis` enum('1','2') DEFAULT NULL COMMENT '1=KasMasuk,2=KasKeluar',
-  `rekap_date` date DEFAULT current_timestamp(),
-  `rekap_banyaknya` int(11) DEFAULT NULL,
-  `rekap_keterangan` varchar(200) DEFAULT NULL,
-  `rekap_kode` varchar(100) DEFAULT NULL,
-  `rekap_total` varchar(100) DEFAULT NULL,
-  `rekap_debit` varchar(100) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data untuk tabel `tbl_kas_rekap`
---
-
-INSERT INTO `tbl_kas_rekap` (`rekap_id`, `rekap_jenis`, `rekap_date`, `rekap_banyaknya`, `rekap_keterangan`, `rekap_kode`, `rekap_total`, `rekap_debit`) VALUES
-(38, '1', '2020-04-23', 5, 'Liberty', '230420-333', '30000', '30000'),
-(39, '1', '2020-04-23', 2, 'Samsudin', '230420-333', '5000', '35000'),
-(40, '1', '2020-03-19', 3, 'Keterangan 2', '240420-445', '30000', '65000'),
-(45, '1', '2020-04-24', 4, 'Keterangan 4', '240420-334', '40000', '105000'),
-(46, '1', '2020-04-28', 3, 'lkadjfalksdj', '280420-765', '20000', '125000'),
-(47, '2', '2020-04-28', 2, 'lakjdflk', '280420-345', '20000', '20000'),
-(48, '2', '2020-04-28', 1, 'alkdjsfkl', '280420-222', '5000', '25000'),
-(49, '1', '2020-06-06', 5, 'Kas masuk baru', '060620-456', '50000', '175000'),
-(50, '2', '2020-06-06', 5, 'Keterangan', '060620-331', '50000', '75000'),
-(51, '2', '2020-06-06', 10, 'Data baru', '060620-335', '40000', '115000'),
-(52, '2', '2020-06-06', 20, 'Tambah baru', '060620-221', '40000', '155000');
+INSERT INTO `tbl_kas_masuk` (`kasmasuk_id`, `tipe`, `berat`, `nama_pelanggan`, `telp`, `keterangan`, `tanggal`, `kas_user_id`, `harga`, `total`) VALUES
+(59, '2', '6', 'prakoso', '989898989', '', '2020-06-26', 1, 8000, 48000),
+(60, '1', '0', 'user1', '989898989', '', '2020-06-26', 1, 4000, 4000),
+(61, '2', '12', 'Dhea', '2147483647', 'bahan mudah luntur, diambil jam 3', '2020-05-27', 1, 8000, 91000),
+(62, '2', '5', 'Tika', '989898989', '', '2020-06-26', 1, 8000, 35000);
 
 -- --------------------------------------------------------
 
@@ -142,15 +112,30 @@ CREATE TABLE `tbl_transaksi` (
   `transaksi_id` bigint(20) NOT NULL,
   `nama_pelanggan` varchar(200) DEFAULT NULL,
   `telp` int(20) DEFAULT NULL,
-  `status` enum('1','2','3','4') DEFAULT NULL COMMENT '1=Order,2=Dikerjakan,3=Selesai,4=Diambil',
+  `status` enum('1','2','3','4') NOT NULL COMMENT '1=Order,2=Dikerjakan,3=Selesai,4=Diambil',
   `tanggal` date DEFAULT NULL,
   `item_tipe` int(11) DEFAULT NULL,
   `item_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `keterangan` varchar(255) DEFAULT NULL,
+  `berat` varchar(11) DEFAULT NULL,
   `harga` int(20) DEFAULT NULL,
   `total` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tbl_transaksi`
+--
+
+INSERT INTO `tbl_transaksi` (`transaksi_id`, `nama_pelanggan`, `telp`, `status`, `tanggal`, `item_tipe`, `item_id`, `user_id`, `keterangan`, `berat`, `harga`, `total`) VALUES
+(1, 'prakoso', 989898989, '4', '2020-06-26', 2, 12, 1, '', '6', 8000, 48000),
+(3, 'user1', 989898989, '4', '2020-06-26', 1, 11, 1, '', '0', 4000, 4000),
+(4, 'Tika', 989898989, '4', '2020-06-26', 2, 12, 1, '', '5', 8000, 35000),
+(5, 'ronal', 989898989, '3', '2020-06-25', 1, 11, 1, '', '0', 4000, 4000),
+(6, 'Riko', 0, '2', '2020-06-26', 2, 12, 1, '', '3', 8000, 19000),
+(7, 'Wahyudi', 98989898, '1', '2020-06-27', 1, 13, 1, 'Bahan mudah luntur', '', 2500, 2500),
+(8, 'Dhea', 2147483647, '1', '2020-05-27', 2, 12, 1, 'bahan mudah luntur, diambil jam 3', '12', 8000, 91000),
+(9, 'Reza', 787878787, '1', '2020-06-16', 2, 12, 1, '', '5', 8000, 35000);
 
 -- --------------------------------------------------------
 
@@ -202,12 +187,6 @@ ALTER TABLE `tbl_kas_masuk`
   ADD PRIMARY KEY (`kasmasuk_id`);
 
 --
--- Indeks untuk tabel `tbl_kas_rekap`
---
-ALTER TABLE `tbl_kas_rekap`
-  ADD PRIMARY KEY (`rekap_id`);
-
---
 -- Indeks untuk tabel `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
@@ -228,7 +207,7 @@ ALTER TABLE `tbl_user`
 -- AUTO_INCREMENT untuk tabel `tbl_item`
 --
 ALTER TABLE `tbl_item`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_kas_keluar`
@@ -240,19 +219,13 @@ ALTER TABLE `tbl_kas_keluar`
 -- AUTO_INCREMENT untuk tabel `tbl_kas_masuk`
 --
 ALTER TABLE `tbl_kas_masuk`
-  MODIFY `kasmasuk_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-
---
--- AUTO_INCREMENT untuk tabel `tbl_kas_rekap`
---
-ALTER TABLE `tbl_kas_rekap`
-  MODIFY `rekap_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `kasmasuk_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `transaksi_id` bigint(20) NOT NULL AUTO_INCREMENT;
+  MODIFY `transaksi_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`

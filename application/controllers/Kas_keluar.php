@@ -10,7 +10,6 @@ class Kas_keluar extends CI_Controller
 		error_reporting(0);
 		is_logged_in();
 		$this->load->model('Kaskeluar_model', 'kaskeluar_model');
-		$this->load->model('Rekap_model', 'rekap_model');
 
 		// ambil session user
 		if (!empty($this->session->userdata('user_name'))) {

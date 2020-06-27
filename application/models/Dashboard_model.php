@@ -4,6 +4,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Dashboard_model extends CI_Model
 {
 	private $_kasMasuk = 'tbl_kas_masuk';
+	private $_kasKeluar = 'tbl_kas_keluar';
 	private $_transaksi = 'tbl_transaksi';
 	public function total_kasmasuk()
 	{
@@ -15,27 +16,24 @@ class Dashboard_model extends CI_Model
 
 	public function getPemasukan()
 	{
-		// $curr_month = date(06);
-		$curr_month = 06;
+		$curr_month = date('m');
 
-		$this->db->select('*');
+		$this->db->select_sum('total');
 		$this->db->from($this->_kasMasuk);
-		$this->db->where('MONTH(tanggal)', $curr_month); //use date function
+		$this->db->where('MONTH(tanggal)', $curr_month);
 		$query = $this->db->get();
-		// return $query->row_array();
-		return $query;
+		return $query->row_array();
 	}
 
 	public function getPengeluaran()
 	{
-		$date = new DateTime("now");
-		$curr_date = $date->format('Y-m-d');
+		$curr_month = date('m');
 
-		$this->db->select('*');
-		$this->db->from($this->_kasMasuk);
-		$this->db->where('MONTH(tanggal)', $curr_date); //use date function
+		$this->db->select_sum('total');
+		$this->db->from($this->_kasKeluar);
+		$this->db->where('MONTH(tanggal)', $curr_month);
 		$query = $this->db->get();
-		return $query;
+		return $query->row_array();
 	}
 
 	// **

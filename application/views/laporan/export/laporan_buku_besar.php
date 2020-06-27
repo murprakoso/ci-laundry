@@ -45,25 +45,41 @@
 
 	<?php
 	$no = 0;
-	foreach ($bukubesar->result() as $row) : ?>
+	foreach ($debit->result() as $row) :
+		++$no;
+	?>
 		<tr>
-			<td style="text-align: center;"><?= ++$no; ?></td>
-			<td><?= tgl_indo(date('Y-m-d', strtotime($row->rekap_date))); ?></td>
-			<td><?= ($row->rekap_jenis == 1 ? rupiah($row->rekap_total) : '-'); ?></td>
-			<td><?= ($row->rekap_jenis == 2 ? rupiah($row->rekap_total) : '-'); ?></td>
-			<td><?= ($row->rekap_jenis == 1 ? rupiah($row->rekap_total) : rupiah('-' . $row->rekap_total)); ?></td>
+			<td style="text-align: center;"><?= $no; ?></td>
+			<td><?= tgl_indo(date('Y-m-d', strtotime($row->tanggal))); ?></td>
+			<td><?= (!empty($row->total) ? rupiah($row->total) : '-'); ?></td>
+			<td>-</td>
+			<td><?= rupiah($row->total); ?></td>
 		</tr>
 		<?php
-		$total1 += ($row->rekap_jenis == 1 ? $row->rekap_total : '');
-		$total2 += ($row->rekap_jenis == 2 ? $row->rekap_total : '');
-		$total3 = $total1 - $total2;
+		$totalDebit += $row->total;
+		?>
+	<?php endforeach; ?>
+	<!--  -->
+	<?php
+	foreach ($kredit->result() as $row) :
+		++$no;
+	?>
+		<tr>
+			<td style="text-align: center;"><?= $no; ?></td>
+			<td><?= tgl_indo(date('Y-m-d', strtotime($row->tanggal))); ?></td>
+			<td>-</td>
+			<td><?= (!empty($row->total) ? rupiah('-' . $row->total) : '-'); ?></td>
+			<td><?= rupiah('-' . $row->total); ?></td>
+		</tr>
+		<?php
+		$totalKredit += $row->total;
 		?>
 	<?php endforeach; ?>
 	<tr>
 		<td colspan="2" class="td-bold">TOTAL</td>
-		<td class="td-bold"><?= rupiah($total1); ?></td>
-		<td class="td-bold"><?= rupiah($total2); ?></td>
-		<td class="td-bold"><?= rupiah($total3); ?></td>
+		<td class="td-bold"><?= rupiah($totalDebit); ?></td>
+		<td class="td-bold"><?= rupiah('-' . $totalKredit); ?></td>
+		<td class="td-bold"><?= rupiah($totalDebit - $totalKredit); ?></td>
 	</tr>
 </table>
 

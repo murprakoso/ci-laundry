@@ -55,7 +55,7 @@
 														if ($row->user_level == '1') {
 															echo "Admin";
 														} else {
-															echo "User";
+															echo "Petugas";
 														}
 														?>
 													</td>
