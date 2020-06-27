@@ -9,7 +9,9 @@
 			<div class="col-md-6 m-0">
 				<div class="kanan mt-2">
 					<div class="btn-group">
-						<button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData"><i class="fa fa-plus"></i> Tambah</button>
+						<?php if ($this->session->userdata('user_level') == 1) : ?>
+							<button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData"><i class="fa fa-plus"></i> Tambah</button>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

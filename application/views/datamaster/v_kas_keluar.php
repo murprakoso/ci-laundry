@@ -78,7 +78,7 @@
 													</td>
 													<td><?= $row->user_fullname; ?></td>
 													<td><?= rupiah($row->harga); ?></td>
-													<td><?= rupiah($row->total); ?></td>
+													<td><strong><?= rupiah($row->total); ?></strong></td>
 													<td class="text__16" style="display: inline-block;min-width: 50px;">
 														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kaskeluar_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
 

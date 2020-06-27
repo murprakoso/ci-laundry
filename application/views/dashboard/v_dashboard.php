@@ -5,22 +5,18 @@
 		<div class="page-title">
 			<div class="title_left">
 				<!-- <h3>Dashboard </h3> -->
-				<?php
-				$user_id = $this->session->userdata('user_id');
-				$row = $this->db->get_where('tbl_user', ['user_id' => $user_id])->row_array();
-				?>
 			</div>
 
 			<!-- <div class="title_right">
-                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"><i class="fa fa-search mr-1"> </i> </button>
-                        </span>
-                    </div>
-                </div>
-            </div> -->
+				<div class="col-md-5 col-sm-5   form-group pull-right top_search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="button"><i class="fa fa-search mr-1"> </i> </button>
+						</span>
+					</div>
+				</div>
+			</div> -->
 		</div>
 		<div class="clearfix"></div>
 
@@ -37,7 +33,7 @@
 
 		<div class="row">
 
-			<?php if ($row['user_level'] == 1) : ?>
+			<?php if ($this->session->userdata('user_level') == 1) : ?>
 				<div class="col-md-12">
 					<div class="x_content">
 						<div class="row">
@@ -66,33 +62,22 @@
 									<div class="icon"><i class="fa fa-download"></i>
 									</div>
 									<?php
-									// select 'id terakhir' di tbl rekap
-									$cekRekap = $this->rekap_model->cek_rekapkeluar()->row_array();
-									$rekapID = $cekRekap['rekap_id'];
-									// ambil data berdasarkan 'id terakhir'
-									$rekap = $this->db->get_where('tbl_kas_rekap', ['rekap_id' => $rekapID])->row_array();
-									// $rekap['rekap_total'];
-									$debit = $rekap['rekap_debit'];
+									foreach ($debitMasuk->row_array() as $r) {
+										$dM[] = $r['total'];
+									}
+									$total = array_sum($dM);
 									?>
-									<div class="count"><?= rupiah($debit); ?></div>
 
-									<h4>Debit Penerimaan Bulan <?= date('M'); ?></h3>
+									<div class="count"><?= rupiah($total); ?></div>
+
+									<h4>Debit Pemasukan Bulan <?= date('M'); ?></h3>
 								</div>
 							</div>
 							<div class="animated flipInY col-lg-3 col-md-3 col-sm-6">
 								<div class="tile-stats">
 									<div class="icon"><i class="fa fa-upload"></i>
 									</div>
-									<?php
-									// select 'id terakhir' di tbl rekap
-									$cekRekap = $this->rekap_model->cek_rekapmasuk()->row_array();
-									$rekapID = $cekRekap['rekap_id'];
-									// ambil data berdasarkan 'id terakhir'
-									$rekap = $this->db->get_where('tbl_kas_rekap', ['rekap_id' => $rekapID])->row_array();
-									// $rekap['rekap_total'];
-									$debit = $rekap['rekap_debit'];
-									?>
-									<div class="count"><?= rupiah($debit); ?></div>
+									<div class="count"><?= rupiah(1000); ?></div>
 
 									<h4>Debit Pengeluaran Bulan <?= date('M'); ?></h4>
 								</div>
@@ -155,25 +140,90 @@
 						<div class="card">
 							<div class="card-body">
 								<p class="font-weight-bold"><i class="fa fa-info-circle"></i> Order</p>
-								<form action="" method="post">
+								<form action="<?= base_url('transaksi'); ?>" method="post">
+									<input type="hidden" name="status" value="1">
 									<table class="table">
 										<tbody>
 											<tr>
 												<td>Hari ini</td>
-												<td align="right"><b>0</b></td>
+												<td align="right"><b><?= $orderToday->num_rows(); ?></b></td>
 											</tr>
 											<tr>
 												<td>Semua</td>
-												<td align="right"><b>25</b></td>
-											</tr>
-											<tr>
-												<td></td>
-												<td align="right">
-													<button type="submit" name="order" class="btn btn-success">Detail <i class="fa fa-arrow-right"></i></button>
-												</td>
+												<td align="right"><b><?= $orderAll->num_rows(); ?></b></td>
 											</tr>
 										</tbody>
 									</table>
+									<button type="submit" name="order" class="btn btn-success float-right">Detail <i class="fa fa-arrow-right"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="card">
+							<div class="card-body">
+								<p class="font-weight-bold"><i class="fa fa-info-circle"></i> Dikerjakan</p>
+								<form action="<?= base_url('transaksi'); ?>" method="post">
+									<input type="hidden" name="status" value="2">
+									<table class="table">
+										<tbody>
+											<tr>
+												<td>Hari ini</td>
+												<td align="right"><b><?= $dikerjakanToday->num_rows(); ?></b></td>
+											</tr>
+											<tr>
+												<td>Semua</td>
+												<td align="right"><b><?= $dikerjakanAll->num_rows(); ?></b></td>
+											</tr>
+										</tbody>
+									</table>
+									<button type="submit" name="order" class="btn btn-success float-right">Detail <i class="fa fa-arrow-right"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="card">
+							<div class="card-body">
+								<p class="font-weight-bold"><i class="fa fa-info-circle"></i> Selesai</p>
+								<form action="<?= base_url('transaksi'); ?>" method="post">
+									<input type="hidden" name="status" value="3">
+									<table class="table">
+										<tbody>
+											<tr>
+												<td>Hari ini</td>
+												<td align="right"><b><?= $selesaiToday->num_rows(); ?></b></td>
+											</tr>
+											<tr>
+												<td>Semua</td>
+												<td align="right"><b><?= $selesaiAll->num_rows(); ?></b></td>
+											</tr>
+										</tbody>
+									</table>
+									<button type="submit" name="order" class="btn btn-success float-right">Detail <i class="fa fa-arrow-right"></i></button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-3">
+						<div class="card">
+							<div class="card-body">
+								<p class="font-weight-bold"><i class="fa fa-info-circle"></i> Diambil</p>
+								<form action="<?= base_url('transaksi'); ?>" method="post">
+									<input type="hidden" name="status" value="4">
+									<table class="table">
+										<tbody>
+											<tr>
+												<td>Hari ini</td>
+												<td align="right"><b><?= $diambilToday->num_rows(); ?></b></td>
+											</tr>
+											<tr>
+												<td>Semua</td>
+												<td align="right"><b><?= $diambilAll->num_rows(); ?></b></td>
+											</tr>
+										</tbody>
+									</table>
+									<button type="submit" name="order" class="btn btn-success float-right">Detail <i class="fa fa-arrow-right"></i></button>
 								</form>
 							</div>
 						</div>

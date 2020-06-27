@@ -33,7 +33,7 @@
 							<div class="col-sm-12">
 								<div class="card-box table-responsive">
 									<table id="datatable" class="table table-hover table-bordered" style="width:100%">
-										<form action="<?= base_url('kas_masuk/hapus_kas'); ?>" method="POST" id="form-delete"></form>
+										<form action="<?= base_url('kas_masuk/deletes'); ?>" method="POST" id="form-delete"></form>
 										<thead>
 											<tr>
 												<th class="tidakprint">
@@ -41,6 +41,7 @@
 												</th>
 												<th>No.</th>
 												<th>Tanggal</th>
+												<th>Tipe</th>
 												<th>Berat</th>
 												<th>Nama Pelanggan</th>
 												<th>No HP</th>
@@ -60,23 +61,24 @@
 											?>
 												<tr>
 													<td style="width: 5px;">
-														<input type="checkbox" class="check-item" form="form-delete" name="kas_id[]" value="<?= $row->kas_id; ?>">
+														<input type="checkbox" class="check-item" form="form-delete" name="kasmasuk_id[]" value="<?= $row->kasmasuk_id; ?>">
 													</td>
 													<td style="width: 5px;"><?= ++$no; ?></td>
 													<td><?= date('d-M-Y', strtotime($row->tanggal)); ?></td>
-													<td style="width: 8px;"><?= $row->berat; ?></td>
-													<td style="min-width: 150px;"><?= $row->nama_pelanggan; ?></td>
+													<td><?= ($row->tipe == 1 ? 'Satuan' : 'Kiloan'); ?></td>
+													<td style="width: 8px;"><?= (!empty($row->berat)) ? $row->berat . ' Kg' : '-'; ?></td>
+													<td style="min-width: 150px;"><strong><?= $row->nama_pelanggan; ?></strong></td>
 													<td><?= $row->telp; ?></td>
 													<td class="text-center">
 														<?= (!empty($row->keterangan) ? $row->keterangan : '-'); ?>
 													</td>
 													<td><?= $row->user_fullname; ?></td>
 													<td><?= rupiah($row->harga); ?></td>
-													<td><?= rupiah($row->total); ?></td>
+													<td class="font-weight-bold"><?= rupiah($row->total); ?></td>
 													<td class="text__16 tidakprint" style="display: inline-block; min-width: 50px;">
-														<!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kas_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a> -->
+														<!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kasmasuk_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a> -->
 
-														<a href="<?= base_url('kas_masuk/hapus/' . $row->kas_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
+														<a href="<?= base_url('kas_masuk/delete/' . $row->kasmasuk_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
 													</td>
 												</tr>
 											<?php endforeach; ?>
@@ -188,7 +190,7 @@ foreach ($kasmasuk->result() as $row) :
 	$kode2 = $ex[1];
 ?>
 	<form action="<?= base_url('kas_masuk/ubah'); ?>" method="POST" enctype="multipart/form-data">
-		<div class="modal fade" id="formUbah<?= $row->kas_id; ?>" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
+		<div class="modal fade" id="formUbah<?= $row->kasmasuk_id; ?>" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -259,7 +261,7 @@ foreach ($kasmasuk->result() as $row) :
 							</div>
 						</div>
 						<input type="hidden" name="kode1" value="<?= $kode1; ?>">
-						<input type="hidden" name="kas_id" value="<?= $row->kas_id; ?>">
+						<input type="hidden" name="kasmasuk_id" value="<?= $row->kasmasuk_id; ?>">
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-sm btn_flat btn-secondary" data-dismiss="modal">Close</button>

@@ -17,6 +17,21 @@ class Transaksi_model extends CI_Model
 		return $query;
 	}
 
+	// tampilkan data transaksi berdasarkan status
+	public function getTransaksiByStatus($status)
+	{
+		// return true;
+		$this->db->select('*');
+		$this->db->from($this->_table);
+		$this->db->join('tbl_user', 'tbl_user.user_id = tbl_transaksi.user_id');
+		$this->db->join('tbl_item', 'tbl_item.item_id = tbl_transaksi.item_id');
+		$this->db->where('status', $status);
+		$this->db->order_by('transaksi_id', 'DESC');
+		$query = $this->db->get();
+		return $query;
+	}
+
+
 	public function insertTransaksi($tanggal, $pelanggan, $telp, $tipe, $berat, $item, $keterangan, $harga, $total, $userId)
 	{
 		$data = [

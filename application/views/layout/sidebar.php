@@ -43,7 +43,7 @@
 										<li><a href="<?= base_url('kas-keluar'); ?>">Kas Keluar</a></li>
 									</ul>
 								</li>
-								<li><a href="<?= base_url('transaksi'); ?>"><i class="fa fa-folder-open"></i> Transaksi </a>
+								<li><a href="<?= base_url('transaksi'); ?>"><i class="fa fa-exchange"></i> Transaksi </a>
 								</li>
 								<?php if ($row['user_level'] == 1) : ?>
 

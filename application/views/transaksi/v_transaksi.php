@@ -31,10 +31,10 @@
 											<div class="input-group">
 												<select name="status" class="form-control" onchange="submit();">
 													<option value="">-- Pilih status --</option>
-													<option value="">Order</option>
-													<option value="">Dikerjakan</option>
-													<option value="">Selesai</option>
-													<option value="">Diambil</option>
+													<option value="1">Order</option>
+													<option value="2">Dikerjakan</option>
+													<option value="3">Selesai</option>
+													<option value="4">Diambil</option>
 												</select>
 											</div>
 										</div>
@@ -222,6 +222,7 @@
 <!-- /.Modal tambah -->
 
 
+<!-- UPdate Status Transaksi-->
 <?php foreach ($transaksi->result() as $row) : ?>
 	<div class="modal fade" id="formStatus<?= $row->transaksi_id; ?>" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -233,7 +234,17 @@
 					</button>
 				</div>
 				<form action="<?= base_url('transaksi/update_status'); ?>" method="POST">
-
+					<div class="input-hidden">
+						<input type="hidden" name="berat" value="<?= $row->berat; ?>">
+						<input type="hidden" name="pelanggan" value="<?= $row->nama_pelanggan; ?>">
+						<input type="hidden" name="telp" value="<?= $row->telp; ?>">
+						<input type="hidden" name="keterangan" value="<?= $row->keterangan; ?>">
+						<input type="hidden" name="tanggal" value="<?= $row->tanggal; ?>">
+						<input type="hidden" name="user_id" value="<?= $row->user_id; ?>">
+						<input type="hidden" name="tipe" value="<?= $row->item_tipe; ?>">
+						<input type="hidden" name="harga" value="<?= $row->harga; ?>">
+						<input type="hidden" name="total" value="<?= $row->total; ?>">
+					</div>
 					<div class="modal-body">
 						<div class="form-group">
 							<div class="row">
@@ -271,13 +282,19 @@
 									<label>Status</label>
 								</div>
 								<div class="col-md-9">
-									<select name="status" class="form-control" required>
-										<option value="">- Pilih Status -</option>
-										<option value="1">Order</option>
-										<option value="2">Dikerjakan</option>
-										<option value="3">Selesai</option>
-										<option value="4">Diambil</option>
-									</select>
+									<?php if ($row->status != 4) : ?>
+										<select name="status" class="form-control" required>
+											<option value="">- Pilih Status -</option>
+											<option value="1">Order</option>
+											<option value="2">Dikerjakan</option>
+											<option value="3">Selesai</option>
+											<option value="4">Diambil</option>
+										</select>
+									<?php else : ?>
+										<div class="row">
+											<div class="alert alert-secondary">Diambil</div>
+										</div>
+									<?php endif; ?>
 								</div>
 							</div>
 						</div>

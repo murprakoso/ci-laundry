@@ -23,21 +23,19 @@ class Kasmasuk_model extends CI_Model
 		$this->db->insert($this->_table, $data);
 	}
 
-	// update kas masuk
-	public function updateKas($data, $kas_id)
+
+	public function deleteKas($kasmasuk_id)
 	{
-		$this->db->where('kas_id', $kas_id);
-		$this->db->update($this->_table, $data);
+		$this->db->where('kasmasuk_id', $kasmasuk_id);
+		if ($this->db->delete($this->_table)) {
+			return true;
+		}
 	}
 
-	public function hapusKas($kas_id)
-	{
-		$this->db->delete($this->_table, array('kas_id' => $kas_id));
-	}
 	// proses hapus dari checkbox
-	public function delete($kas_id)
+	public function deleteMultiple($kasmasukId)
 	{
-		$this->db->where_in('kas_id', $kas_id);
+		$this->db->where_in('kasmasuk_id', $kasmasukId);
 		$this->db->delete($this->_table);
 	}
 

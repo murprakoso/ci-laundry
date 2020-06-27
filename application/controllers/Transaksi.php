@@ -9,6 +9,7 @@ class Transaksi extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('Transaksi_model');
+		$this->load->model('Kasmasuk_model');
 		$this->load->model('Item_model');
 		is_logged_in();
 
@@ -23,9 +24,15 @@ class Transaksi extends CI_Controller
 
 	public function index()
 	{
+		if ($this->input->post('status')) {
+			$status = $this->input->post('status');
+			$transaksi = $this->Transaksi_model->getTransaksiByStatus($status);
+		} else {
+			$transaksi = $this->Transaksi_model->getTransaksi();
+		}
+
 		$data = [
-			'transaksi' => $this->Transaksi_model->getTransaksi(), //panggil fungsi select semua kas masuk
-			// 'items' => $this->Item_model->getItemByTipe(), //panggil item
+			'transaksi' => $transaksi, //panggil fungsi select semua kas masuk
 			'title' => 'Transaksi',
 			'content' => 'transaksi/v_transaksi'
 		];
@@ -97,6 +104,21 @@ class Transaksi extends CI_Controller
 	public function update_status()
 	{
 		if ($this->Transaksi_model->updateStatusTransaksi()) {
+			$status = $this->input->post('status');
+			if ($status == 4) {
+				$data = [
+					'tipe' => $this->input->post('tipe'),
+					'berat' => $this->input->post('berat'),
+					'nama_pelanggan' => $this->input->post('pelanggan'),
+					'telp' => $this->input->post('telp'),
+					'keterangan' => $this->input->post('keterangan'),
+					'tanggal' => $this->input->post('tanggal'),
+					'kas_user_id' => $this->input->post('user_id'),
+					'harga' => $this->input->post('harga'),
+					'total' => $this->input->post('total'),
+				];
+				$this->Kasmasuk_model->insertKas($data);
+			}
 			$this->session->set_flashdata('success', 'Status transaksi diupdate!');
 		}
 		redirect('transaksi');
