@@ -6,7 +6,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h3 class="m-0" id="titleprint">Rekap Laporan Kas Keluar</h3>
+				<h3 class="m-0" id="titleprint">Laporan Kas Keluar</h3>
 			</div>
 		</div>
 

@@ -6,7 +6,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h3 class="m-0" id="titleprint">Rekap Laporan Buku Besar</h3>
+				<h3 class="m-0" id="titleprint">Laporan Laba Rugi</h3>
 			</div>
 		</div>
 
@@ -20,9 +20,9 @@
 								<!--  -->
 								<div class="card">
 									<div class="card-body">
-										<p class="font-weight-bold">Laporan Buku Besar Per-Bulan</p>
+										<p class="font-weight-bold">Laporan Laba Rugi Per-Bulan</p>
 										<hr>
-										<form action="<?= base_url('laporan_bukubesar/cetak_per_bulan'); ?>" target="_blank" method="post">
+										<form action="<?= base_url('laporan_labarugi/cetak_per_bulan'); ?>" target="_blank" method="post">
 											<div class="form-group">
 												<div class="row">
 													<div class="col-lg-6">
@@ -71,9 +71,9 @@
 								<!--  -->
 								<div class="card">
 									<div class="card-body">
-										<p class="font-weight-bold">Laporan Buku Besar Per-Periode</p>
+										<p class="font-weight-bold">Laporan Laba Rugi Per-Periode</p>
 										<hr>
-										<form action="<?= base_url('laporan_bukubesar/cetak_per_periode'); ?>" target="_blank" method="post">
+										<form action="<?= base_url('laporan_labarugi/cetak_per_periode'); ?>" target="_blank" method="post">
 											<div class="form-group">
 												<div class="row">
 													<div class="col-lg-6">

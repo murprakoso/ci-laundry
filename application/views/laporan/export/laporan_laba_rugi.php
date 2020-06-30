@@ -1,7 +1,7 @@
 <?php error_reporting(0); ?>
 <!DOCTYPE html>
 <?php echo '<html lang="en"><head>'; ?>
-<title>Cetak Laporan Buku Besar</title>
+<title>Cetak Laporan Laba Rugi</title>
 <!-- <link href="<?= base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> -->
 <style>
 	table,
@@ -22,13 +22,13 @@
 <?php echo '</head><body>'; ?>
 <?php if (!empty($bulan || $tahun)) : ?>
 	<p style="text-align: center; font-weight: bold;text-transform: uppercase;">
-		LAPORAN BUKU BESAR <br>
+		LAPORAN LABA RUGI <br>
 		ALMAL LAUNDRY <br>
 		BULAN <?= bulan_indo($bulan); ?> TAHUN <?= $tahun; ?>
 	</p>
 <?php else : ?>
 	<p style="text-align: center; font-weight: bold;text-transform: uppercase;">
-		LAPORAN BUKU BESAR <br>
+		LAPORAN LABA RUGI <br>
 		ALMAL LAUNDRY <br>
 		PERIODE <?= tgl_indo(date('Y-m-d', strtotime($tgl_awal))); ?> <span>s/d</span> <?= tgl_indo(date('Y-m-d', strtotime($tgl_akhir))); ?>
 	</p>

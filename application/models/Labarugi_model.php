@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Bukubesar_model extends CI_Model
+class Labarugi_model extends CI_Model
 {
 	private $_kasMasuk = 'tbl_kas_masuk';
 	private $_kasKeluar = 'tbl_kas_keluar';
@@ -57,4 +57,4 @@ class Bukubesar_model extends CI_Model
 	}
 }
 
-/* End of file Bukubesar_model.php */
+/* End of file Labarugi_model.php */

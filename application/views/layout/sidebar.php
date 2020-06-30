@@ -50,9 +50,9 @@
 									<!-- Laporan -->
 									<li><a><i class="fa fa-folder-open"></i> Laporan</a>
 										<ul class="nav child_menu">
-											<li><a href="<?= base_url('laporan-kas-masuk'); ?>">Rekap Kas Masuk</a></li>
-											<li><a href="<?= base_url('laporan-kas-keluar'); ?>">Rekap Kas Keluar</a></li>
-											<li><a href="<?= base_url('laporan-buku-besar'); ?>">Laporan Buku Besar</a></li>
+											<li><a href="<?= base_url('laporan-kas-masuk'); ?>">Laporan Kas Masuk</a></li>
+											<li><a href="<?= base_url('laporan-kas-keluar'); ?>">Laporan Kas Keluar</a></li>
+											<li><a href="<?= base_url('laporan-laba-rugi'); ?>">Laporan Laba Rugi</a></li>
 										</ul>
 									</li>
 
