@@ -35,9 +35,11 @@
 												<th>Harga Satuan</th>
 												<th>Harga per (1KG)</th>
 												<th>Potongan Harga</th>
-												<th class="tidakprint">
-													<i class="fa fa-cog"></i>
-												</th>
+												<?php if ($this->session->userdata('user_level') == 1) : ?>
+													<th class="tidakprint">
+														<i class="fa fa-cog"></i>
+													</th>
+												<?php endif; ?>
 											</tr>
 										</thead>
 
@@ -52,11 +54,13 @@
 													<td><?= ($row->item_tipe == 1 ?  rupiah($row->item_harga) : '-'); ?></td>
 													<td><?= ($row->item_tipe == 2 ?  rupiah($row->item_harga) : '-'); ?></td>
 													<td><?= (!empty($row->item_diskon) ? rupiah($row->item_diskon) : '-'); ?></td>
-													<td class="text__16">
-														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->item_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
+													<?php if ($this->session->userdata('user_level') == 1) : ?>
+														<td class="text__16">
+															<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->item_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
 
-														<a href="<?= base_url('item/delete/' . $row->item_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
-													</td>
+															<a href="<?= base_url('item/delete/' . $row->item_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
+														</td>
+													<?php endif; ?>
 												</tr>
 											<?php endforeach; ?>
 										</tbody>
