@@ -9,7 +9,7 @@
 			<div class="col-md-6 m-0">
 				<div class="kanan mt-2">
 					<div class="btn-group">
-						<button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData"><i class="fa fa-plus"></i> Tambah</button>
+						<button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm addTransaksi"><i class="fa fa-plus"></i> Tambah</button>
 					</div>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 							<div class="col-sm-12">
 								<div class="card-box table-responsive">
 									<!--  -->
-									<table id="datatable" class="table table-hover table-bordered" style="width:100%">
+									<table id="datatable" class="table table-hover table-bordered table-striped" style="width:100%">
 										<thead>
 											<tr>
 												<th>No.</th>
@@ -104,10 +104,19 @@
 													<td><?= (!empty($row->keterangan) ? $row->keterangan : '-'); ?></td>
 													<td class="font-weight-bold"><?= $row->user_fullname; ?></td>
 													<td><?= rupiah($row->harga); ?></td>
-													<td class="text-center"><?= (!empty($row->berat) ? $row->berat . ' Kg' : '-'); ?></td>
+													<!-- berat -->
+													<?php if (!empty($row->berat) && $row->berat != 0.00) : ?>
+														<td><?= $row->berat . ' Kg'; ?></td>
+													<?php else : ?>
+														<td>-</td>
+													<?php endif; ?>
+
 													<td><?= (!empty($row->item_diskon) ? rupiah($row->item_diskon) : '-'); ?></td>
 													<td class="font-weight-bold"><?= rupiah($row->total); ?></td>
 													<td class="text__16">
+														<?php if ($row->status != 4) : ?>
+															<a href="javascript:void(0);" data-toggle="modal" data-target="#formModal" data-transaksi_id="<?= $row->transaksi_id; ?>" data-item_tipe="<?= $row->item_tipe; ?>" title="Edit" class="mr-3 editTransaksi"><span class="fa fa-pencil text-info"></span></a>
+														<?php endif; ?>
 
 														<a href="<?= base_url('transaksi/delete/' . $row->transaksi_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
 													</td>
@@ -129,17 +138,19 @@
 </div>
 
 
-<!-- Tambah Data -->
-<form action="<?= base_url('transaksi/save'); ?>" method="POST" enctype="multipart/form-data">
-	<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<span class="modal-title" style="font-weight: 550;" id="judul_modal">Tambah Transaksi Baru</span>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+<!-- modal form tambah & update Data || proses in assets/js/transaksi.js -->
+<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<span class="modal-title" style="font-weight: 550;" id="judul_modal">Tambah Transaksi Baru</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="#" method="POST" enctype="multipart/form-data">
+				<input type="hidden" name="transaksi_id" id="transaksi_id" hidden>
+				<input type="hidden" name="status" id="status" hidden>
 				<div class="modal-body">
 					<div class="form-group">
 						<div class="row">
@@ -147,7 +158,7 @@
 								<label>Tanggal</label>
 							</div>
 							<div class="col-md-4">
-								<input type="date" class="form-control" name="tanggal" required>
+								<input type="date" class="form-control" name="tanggal" id="tanggal" required>
 							</div>
 						</div>
 					</div>
@@ -157,7 +168,7 @@
 								<label>Nama Pelanggan</label>
 							</div>
 							<div class="col-md-10">
-								<input type="text" class="form-control" name="nama" required>
+								<input type="text" class="form-control" name="nama" id="nama" required>
 							</div>
 						</div>
 					</div>
@@ -167,7 +178,7 @@
 								<label>No Telp.</label>
 							</div>
 							<div class="col-md-10">
-								<input type="text" class="form-control" name="telp" placeholder="(Optional)">
+								<input type="text" class="form-control" name="telp" id="telp" required>
 							</div>
 						</div>
 					</div>
@@ -177,7 +188,7 @@
 								<label>Tipe</label>
 							</div>
 							<div class="col-md-10">
-								<select name="tipe" class="form-control" id="tipe" required>
+								<select name="tipe" class="form-control tipe" id="tipe" required>
 									<option value="">- Pilih tipe -</option>
 									<option value="1">Satuan</option>
 									<option value="2">Kiloan</option>
@@ -193,7 +204,7 @@
 								<label>Jenis Item</label>
 							</div>
 							<div class="col-md-10">
-								<select name="item" class="form-control" id="item" disabled>
+								<select name="item" class="form-control" id="item" disabled required>
 									<option value="">- Pilih jenis item -</option>
 								</select>
 							</div>
@@ -205,7 +216,7 @@
 								<label>Keterangan</label>
 							</div>
 							<div class="col-md-10">
-								<textarea name="keterangan" class="form-control" rows="2" placeholder="(Optional)"></textarea>
+								<textarea name="keterangan" id="keterangan" class="form-control" rows="2" placeholder="(Optional)"></textarea>
 							</div>
 						</div>
 					</div>
@@ -215,10 +226,10 @@
 					<button type="button" class="btn btn-sm btn_flat btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-sm btn_flat btn-success">Save</button>
 				</div>
-			</div>
+			</form>
 		</div>
 	</div>
-</form>
+</div>
 <!-- /.Modal tambah -->
 
 

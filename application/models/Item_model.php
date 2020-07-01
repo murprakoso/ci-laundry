@@ -23,11 +23,10 @@ class Item_model extends CI_Model
 
 	public function getItemByTipe($tipe)
 	{
-		$this->db->select('*');
-		$this->db->from($this->_table);
-		$this->db->where('item_tipe', $tipe);
-		$query = $this->db->get();
-		// $query = $this->db->get_where($this->_table, array('item_tipe' => $tipe));
+		$query = $this->db->select('*')
+			->from($this->_table)
+			->where('item_tipe', $tipe)
+			->get();
 		return $query->result();
 	}
 

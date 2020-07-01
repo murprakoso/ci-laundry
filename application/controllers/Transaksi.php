@@ -49,9 +49,18 @@ class Transaksi extends CI_Controller
 		echo json_encode($items);
 	}
 
+	public function getTransaksi()
+	{
+		$transaksiId = $this->input->post('transaksiId');
+		$transaksi = $this->Transaksi_model->getTransaksiById($transaksiId)->row_array();
+		echo json_encode($transaksi);
+	}
+
 
 	public function save()
 	{
+		// echo 'tambah';
+		// die;
 		$tanggal = htmlspecialchars($this->input->post('tanggal'));
 		$pelanggan = htmlspecialchars($this->input->post('nama'));
 		$telp = htmlspecialchars($this->input->post('telp'));
@@ -87,6 +96,49 @@ class Transaksi extends CI_Controller
 
 		if ($this->Transaksi_model->insertTransaksi($tanggal, $pelanggan, $telp, $tipe, $berat, $itemId, $keterangan, $harga, $total, $this->userId)) {
 			$this->session->set_flashdata('success', 'Transaksi baru berhasil ditambahkan!');
+		}
+		redirect('transaksi');
+	}
+
+	public function update()
+	{
+		$transaksiId = $this->input->post('transaksi_id');
+		$status = $this->input->post('status');
+		$tanggal = htmlspecialchars($this->input->post('tanggal'));
+		$pelanggan = htmlspecialchars($this->input->post('nama'));
+		$telp = htmlspecialchars($this->input->post('telp'));
+		$tipe = htmlspecialchars($this->input->post('tipe')); // item_tipe
+		$berat = htmlspecialchars($this->input->post('berat'));
+		$itemId = $this->input->post('item'); //item_id
+		$keterangan = htmlspecialchars($this->input->post('keterangan'));
+
+		if ($tipe == 1) {
+			$row = $this->Item_model->getItemById($itemId)->row_array();
+			$harga = $row['item_harga'];
+			$diskon = $row['item_diskon'];
+			$berat = '';
+
+			// cek apakah ada potongan harga
+			if (!empty($diskon)) {
+				$total = $harga - $diskon;
+			} else {
+				$total = $harga;
+			}
+		} elseif ($tipe == 2) {
+			$row = $this->Item_model->getItemById($itemId)->row_array();
+			$harga = $row['item_harga'];
+			$diskon = $row['item_diskon'];
+
+			// cek apakah ada potongan harga
+			if (!empty($diskon)) {
+				$total = $harga * $berat - $diskon;
+			} else {
+				$total = $harga * $berat;
+			}
+		}
+
+		if ($this->Transaksi_model->updateTransaksi($tanggal, $pelanggan, $telp, $tipe, $berat, $itemId, $keterangan, $harga, $total, $this->userId, $transaksiId, $status)) {
+			$this->session->set_flashdata('success', 'Data transaksi berhasil diupdate!');
 		}
 		redirect('transaksi');
 	}

@@ -139,6 +139,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	});
 </script>
 
+
 <!-- Pengaturan user -->
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -162,60 +163,14 @@ defined('BASEPATH') or exit('No direct script access allowed');
 </script>
 
 
-<!-- Form Transaksi tambah -->
-<script type="text/javascript">
-	$(document).ready(function() {
-		var base_url = "<?= base_url(); ?>";
-
-		$('#tipe').on('change', function() {
-			$('#berat').val('').html('');
-			$('#item').val('').html('');
-
-			var tipe = $(this).children("option:selected").val();
-			// console.log(tipe);
-
-			if (tipe == 2) { // jika tipe == kiloan maka tampilkan form berat
-				$('#berat').append(`
-					<div class="row">
-						<div class="col-md-2">
-							<label>Berat(Kg)</label>
-						</div>
-						<div class="col-md-10">
-							<input type="number" class="form-control" name="berat">
-						</div>
-					</div>
-				`);
-			}
-
-
-			$.ajax({
-				url: base_url + 'transaksi/getItem',
-				method: 'post',
-				data: {
-					tipe: tipe,
-				},
-				dataType: 'JSON',
-
-				success: function(results) {
-					$('#item').prop("disabled", false);
-					let data = results;
-					// console.log(data);
-
-					$('#item').append(`
-						<option value="">- Pilih jenis item -</option>
-					`);
-					$.each(data, function(i, data) {
-						$('#item').append(`
-					        <option value="` + data.item_id + `">` + data.item_nama + `</option>
-					    `);
-					});
-				}
-			});
-		});
-
-
-	});
+<!-- // **
+//
+// Add and Update Transaksi
+// * -->
+<script>
+	var base_url = '<?php echo base_url() ?>';
 </script>
+<script src="<?= base_url(); ?>assets/js/transaksi.js"></script>
 
 </body>
 

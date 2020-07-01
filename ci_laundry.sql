@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 27 Jun 2020 pada 21.18
+-- Waktu pembuatan: 01 Jul 2020 pada 09.14
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.5
 
@@ -41,8 +41,8 @@ CREATE TABLE `tbl_item` (
 
 INSERT INTO `tbl_item` (`item_id`, `item_nama`, `item_tipe`, `item_harga`, `item_diskon`) VALUES
 (2, 'Celana Jeans', '2', 5000, 0),
-(11, 'Umum', '1', 4000, NULL),
-(12, 'Umum', '2', 8000, 5000),
+(11, 'Umum', '1', 9000, 2000),
+(12, 'Umum', '2', 8000, 0),
 (13, 'Pakaian Kemeja', '1', 2500, NULL);
 
 -- --------------------------------------------------------
@@ -118,7 +118,7 @@ CREATE TABLE `tbl_transaksi` (
   `item_id` int(11) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `keterangan` varchar(255) DEFAULT NULL,
-  `berat` varchar(11) DEFAULT NULL,
+  `berat` decimal(4,2) DEFAULT NULL,
   `harga` int(20) DEFAULT NULL,
   `total` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -128,14 +128,17 @@ CREATE TABLE `tbl_transaksi` (
 --
 
 INSERT INTO `tbl_transaksi` (`transaksi_id`, `nama_pelanggan`, `telp`, `status`, `tanggal`, `item_tipe`, `item_id`, `user_id`, `keterangan`, `berat`, `harga`, `total`) VALUES
-(1, 'prakoso', 989898989, '4', '2020-06-26', 2, 12, 1, '', '6', 8000, 48000),
-(3, 'user1', 989898989, '4', '2020-06-26', 1, 11, 1, '', '0', 4000, 4000),
-(4, 'Tika', 989898989, '4', '2020-06-26', 2, 12, 1, '', '5', 8000, 35000),
-(5, 'ronal', 989898989, '3', '2020-06-25', 1, 11, 1, '', '0', 4000, 4000),
-(6, 'Riko', 0, '2', '2020-06-26', 2, 12, 1, '', '3', 8000, 19000),
-(7, 'Wahyudi', 98989898, '1', '2020-06-27', 1, 13, 1, 'Bahan mudah luntur', '', 2500, 2500),
-(8, 'Dhea', 2147483647, '1', '2020-05-27', 2, 12, 1, 'bahan mudah luntur, diambil jam 3', '12', 8000, 91000),
-(9, 'Reza', 787878787, '1', '2020-06-16', 2, 12, 1, '', '5', 8000, 35000);
+(1, 'prakoso', 989898989, '4', '2020-06-26', 2, 12, 1, '', '2.40', 8000, 48000),
+(3, 'user1', 989898989, '4', '2020-06-26', 1, 11, 1, '', NULL, 4000, 4000),
+(4, 'Tika', 989898989, '4', '2020-06-26', 2, 12, 1, '', NULL, 8000, 35000),
+(5, 'ronal', 989898989, '3', '2020-06-25', 1, 11, 1, '', '0.00', 9000, 7000),
+(6, 'Riko', 2147483647, '2', '2020-06-26', 1, 11, 1, '', '0.00', 9000, 7000),
+(7, 'Wahyudi', 98989898, '2', '2020-06-27', 1, 13, 1, 'Bahan mudah luntur', NULL, 2500, 2500),
+(8, 'Dhea', 808080808, '2', '2020-05-27', 2, 11, 1, 'bahan mudah luntur, diambil jam 3', '5.00', 9000, 43000),
+(9, 'Reza', 787878787, '1', '2020-06-16', 2, 12, 1, '', NULL, 8000, 35000),
+(10, 'test order', 343434343, '1', '2020-06-29', 2, 12, 1, '', '7.40', 8000, 59200),
+(11, 'Page', 2147483647, '1', '2020-07-01', 2, 12, 1, '', '7.40', 8000, 59200),
+(12, 'Anto', 2147483647, '1', '2020-06-30', 1, 13, 1, '', '0.00', 2500, 2500);
 
 -- --------------------------------------------------------
 
@@ -225,7 +228,7 @@ ALTER TABLE `tbl_kas_masuk`
 -- AUTO_INCREMENT untuk tabel `tbl_transaksi`
 --
 ALTER TABLE `tbl_transaksi`
-  MODIFY `transaksi_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `transaksi_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `tbl_user`
