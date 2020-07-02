@@ -41,6 +41,7 @@ class Laporan_kasmasuk extends CI_Controller
 
 		$paper_size = 'A4';
 		$orientation = 'potrait';
+		// $html = ob_get_clean();
 		$html = $this->output->get_output();
 
 		$this->dompdf->set_paper($paper_size, $orientation);

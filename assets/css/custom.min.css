@@ -6555,6 +6555,11 @@ td.mw-100 {
 	min-width: 100px !important;
 }
 
+th.mw-125,
+td.mw-125 {
+	min-width: 125px !important;
+}
+
 th.mw-150,
 td.mw-150 {
 	min-width: 150px !important;
@@ -6589,4 +6594,8 @@ th.pointer {
 
 .float-right {
 	float: right !important;
+}
+
+.d-inline-block {
+	display: inline-block !important;
 }

@@ -79,10 +79,10 @@
 													<td><?= $row->user_fullname; ?></td>
 													<td><?= rupiah($row->harga); ?></td>
 													<td><strong><?= rupiah($row->total); ?></strong></td>
-													<td class="text__16" style="display: inline-block;min-width: 50px;">
-														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kaskeluar_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
+													<td class="text__16 d-inline-block mw-80">
+														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kaskeluar_id; ?>" data-user_id="" title="Edit" class="mr-2 modalUbah btn btn-sm btn-info"><span class="fa fa-pencil"></span></a>
 
-														<a href="<?= base_url('kas_keluar/delete/' . $row->kaskeluar_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
+														<a href="<?= base_url('kas_keluar/delete/' . $row->kaskeluar_id); ?>" title="Delete" class="tombol-konfirmasi btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
 													</td>
 												</tr>
 											<?php endforeach; ?>

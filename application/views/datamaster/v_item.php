@@ -56,9 +56,9 @@
 													<td><?= (!empty($row->item_diskon) ? rupiah($row->item_diskon) : '-'); ?></td>
 													<?php if ($this->session->userdata('user_level') == 1) : ?>
 														<td class="text__16">
-															<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->item_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a>
+															<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->item_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah btn btn-sm btn-info"><span class="fa fa-pencil"></span></a>
 
-															<a href="<?= base_url('item/delete/' . $row->item_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
+															<a href="<?= base_url('item/delete/' . $row->item_id); ?>" title="Delete" class="tombol-konfirmasi btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
 														</td>
 													<?php endif; ?>
 												</tr>

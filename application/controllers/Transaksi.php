@@ -11,6 +11,7 @@ class Transaksi extends CI_Controller
 		$this->load->model('Transaksi_model');
 		$this->load->model('Kasmasuk_model');
 		$this->load->model('Item_model');
+		$this->load->library('dompdf_gen');
 		is_logged_in();
 
 		// ambil session user
@@ -174,6 +175,31 @@ class Transaksi extends CI_Controller
 			$this->session->set_flashdata('success', 'Status transaksi diupdate!');
 		}
 		redirect('transaksi');
+	}
+
+
+
+	// **
+	// cetak nota transaksi
+	// *
+	public function cetak_nota()
+	{
+		$transaksiId = $this->input->post('transaksi_id');
+
+		$data['transaksi'] = $this->Transaksi_model->cetakNotaTransaksi($transaksiId);
+
+		$this->load->view('transaksi/export/cetak_nota', $data);
+
+		$paper_size = 'A4';
+		$orientation = 'potrait';
+		$html = $this->output->get_output();
+
+		$this->dompdf->set_paper($paper_size, $orientation);
+
+		$this->dompdf->load_html($html);
+		$this->dompdf->render();
+		ob_end_clean();
+		$this->dompdf->stream("nota_transaksi.pdf", array('Attachment' => 0));
 	}
 }
 

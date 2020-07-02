@@ -78,7 +78,7 @@
 													<td class="text__16 tidakprint" style="display: inline-block; min-width: 50px;">
 														<!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kasmasuk_id; ?>" data-user_id="" title="Edit" class="mr-3 modalUbah"><span class="fa fa-pencil text-info"></span></a> -->
 
-														<a href="<?= base_url('kas_masuk/delete/' . $row->kasmasuk_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
+														<a href="<?= base_url('kas_masuk/delete/' . $row->kasmasuk_id); ?>" title="Delete" class="tombol-konfirmasi btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
 													</td>
 												</tr>
 											<?php endforeach; ?>

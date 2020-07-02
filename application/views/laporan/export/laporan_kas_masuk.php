@@ -1,6 +1,6 @@
 <?php error_reporting(0); ?>
 <!DOCTYPE html>
-<?php echo '<html lang="en"><head>'; ?>
+<?php echo '<html><head>'; ?>
 
 <title>Cetak Laporan Kas Masuk</title>
 <!-- <link href="<?= base_url(); ?>assets/vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> -->

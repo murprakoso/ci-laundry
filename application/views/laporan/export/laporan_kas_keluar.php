@@ -1,6 +1,6 @@
 <?php error_reporting(0); ?>
 <!DOCTYPE html>
-<?php echo '<html lang="en"><head>'; ?>
+<?php echo '<html><head>'; ?>
 <title>Cetak Laporan Kas Keluar</title>
 <style>
 	table,

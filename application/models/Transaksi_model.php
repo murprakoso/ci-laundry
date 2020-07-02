@@ -25,6 +25,17 @@ class Transaksi_model extends CI_Model
 		return $query;
 	}
 
+	public function cetakNotaTransaksi($transaksiId)
+	{
+		$query = $this->db->select('*')
+			->from($this->_table)
+			->join('tbl_user', 'tbl_user.user_id = tbl_transaksi.user_id')
+			->join('tbl_item', 'tbl_item.item_id = tbl_transaksi.item_id')
+			->where('transaksi_id', $transaksiId)
+			->get();
+		return $query;
+	}
+
 	// tampilkan data transaksi berdasarkan status
 	public function getTransaksiByStatus($status)
 	{

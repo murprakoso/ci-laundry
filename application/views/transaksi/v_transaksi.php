@@ -49,6 +49,8 @@
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="card-box table-responsive">
+
+
 									<!--  -->
 									<table id="datatable" class="table table-hover table-bordered table-striped" style="width:100%">
 										<thead>
@@ -113,12 +115,22 @@
 
 													<td><?= (!empty($row->item_diskon) ? rupiah($row->item_diskon) : '-'); ?></td>
 													<td class="font-weight-bold"><?= rupiah($row->total); ?></td>
-													<td class="text__16">
+													<td class="mw-125 text-center">
 														<?php if ($row->status != 4) : ?>
-															<a href="javascript:void(0);" data-toggle="modal" data-target="#formModal" data-transaksi_id="<?= $row->transaksi_id; ?>" data-item_tipe="<?= $row->item_tipe; ?>" title="Edit" class="mr-3 editTransaksi"><span class="fa fa-pencil text-info"></span></a>
+
+															<?php
+															$attributes = array('class' => 'd-inline-block', 'target' => '_blank', 'style' => 'vertical-align: middle;', 'title' => 'Cetak Nota');
+															$hidden = array('transaksi_id' => $row->transaksi_id);
+															echo form_open('transaksi/cetak_nota', $attributes, $hidden);
+															?>
+															<button type="submit" class="btn btn-sm btn-success"><i class="fa fa-print"></i></button>
+															<?php echo form_close(); ?>
+
+															<a href="javascript:void(0);" data-toggle="modal" data-target="#formModal" data-transaksi_id="<?= $row->transaksi_id; ?>" data-item_tipe="<?= $row->item_tipe; ?>" title="Edit" class="mr-1 btn btn-sm btn-info editTransaksi"><i class="fa fa-pencil"></i></a>
 														<?php endif; ?>
 
-														<a href="<?= base_url('transaksi/delete/' . $row->transaksi_id); ?>" title="Delete" class="tombol-konfirmasi"><span class="fa fa-trash text-danger"></span></a>
+														<a href="<?= base_url('transaksi/delete/' . $row->transaksi_id); ?>" title="Delete" class="tombol-konfirmasi btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+
 													</td>
 												</tr>
 											<?php endforeach; ?>
