@@ -30,7 +30,7 @@
 										<thead>
 											<tr>
 												<th>No.</th>
-												<th>Nama Item</th>
+												<th>Nama Item/Paket</th>
 												<th>Tipe</th>
 												<th>Harga Satuan</th>
 												<th>Harga per (1KG)</th>
