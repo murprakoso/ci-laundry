@@ -43,10 +43,18 @@
 										<li><a href="<?= base_url('kas-keluar'); ?>">Kas Keluar</a></li>
 									</ul>
 								</li>
-								<li><a href="<?= base_url('transaksi'); ?>"><i class="fa fa-exchange"></i> Transaksi </a>
-								</li>
-								<?php if ($row['user_level'] == 1) : ?>
 
+								<!-- <li><a href="<?= base_url('transaksi'); ?>"><i class="fa fa-exchange"></i> Transaksi </a>
+								</li> -->
+
+								<li><a><i class="fa fa-exchange"></i> Transaksi </a>
+									<ul class="nav child_menu">
+										<li><a href="<?= base_url('transaksi'); ?>">Transaksi Masuk</a></li>
+										<li><a href="<?= base_url('pengeluaran'); ?>">Transaksi Keluar</a></li>
+									</ul>
+								</li>
+
+								<?php if ($row['user_level'] == 1) : ?>
 									<!-- Laporan -->
 									<li><a><i class="fa fa-folder-open"></i> Laporan</a>
 										<ul class="nav child_menu">

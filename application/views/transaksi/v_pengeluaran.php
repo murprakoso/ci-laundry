@@ -6,7 +6,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<h3 class="m-0" id="titleprint">Kas Keluar </h3>
+				<h3 class="m-0" id="titleprint">Transaksi Keluar </h3>
 			</div>
 			<div class="col-md-6 m-0">
 				<div class="kanan mt-2">
@@ -16,7 +16,7 @@
 								<i class="fa fa-trash"></i>
 							</button>
 						</div>
-						<!-- <button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData ml-2"><i class="fa fa-plus"></i> Tambah</button> -->
+						<button type="button" data-toggle="modal" data-target="#formModal" class="btn btn_flat btn-success btn-sm tombolTambahData ml-2"><i class="fa fa-plus"></i> Tambah</button>
 					</div>
 					<!-- Tombol Print & Export -->
 					<!-- <a id="tt"></a> -->
@@ -33,7 +33,7 @@
 							<div class="col-sm-12">
 								<div class="card-box table-responsive">
 									<table id="datatable" class="table table-hover table-bordered" style="width:100%">
-										<form action="<?= base_url('kas_keluar/deletes'); ?>" method="POST" id="form-delete"></form>
+										<form action="<?= base_url('pengeluaran/deletes'); ?>" method="POST" id="form-delete"></form>
 										<thead>
 											<tr>
 												<th class="tidakprint">
@@ -80,9 +80,9 @@
 													<td><?= rupiah($row->harga); ?></td>
 													<td><strong><?= rupiah($row->total); ?></strong></td>
 													<td class="text__16 d-inline-block mw-80">
-														<!-- <a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kaskeluar_id; ?>" data-user_id="" title="Edit" class="mr-2 modalUbah btn btn-sm btn-info"><span class="fa fa-pencil"></span></a> -->
+														<a href="javascript:void(0);" data-toggle="modal" data-target="#formUbah<?= $row->kaskeluar_id; ?>" data-user_id="" title="Edit" class="mr-2 modalUbah btn btn-sm btn-info"><span class="fa fa-pencil"></span></a>
 
-														<a href="<?= base_url('kas_keluar/delete/' . $row->kaskeluar_id); ?>" title="Delete" class="tombol-konfirmasi btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
+														<a href="<?= base_url('pengeluaran/delete/' . $row->kaskeluar_id); ?>" title="Delete" class="tombol-konfirmasi btn btn-sm btn-danger"><span class="fa fa-trash"></span></a>
 													</td>
 												</tr>
 											<?php endforeach; ?>
@@ -102,7 +102,7 @@
 
 <!-- |====================================|Modal toggle box|========================================================-->
 <!-- Tambah Data -->
-<form action="<?= base_url('kas_keluar/save'); ?>" method="POST" enctype="multipart/form-data">
+<form action="<?= base_url('pengeluaran/save'); ?>" method="POST" enctype="multipart/form-data">
 	<div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
@@ -192,7 +192,7 @@
 
 <!-- Ubah Data -->
 <?php foreach ($kaskeluar->result() as $row) : ?>
-	<form action="<?= base_url('kas_keluar/update'); ?>" method="POST" enctype="multipart/form-data">
+	<form action="<?= base_url('pengeluaran/update'); ?>" method="POST" enctype="multipart/form-data">
 		<div class="modal fade" id="formUbah<?= $row->kaskeluar_id; ?>" tabindex="-1" role="dialog" aria-labelledby="judulModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">

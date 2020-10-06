@@ -168,9 +168,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
 // Add and Update Transaksi
 // * -->
 <script>
+	// set default date time now
+	$(document).ready(function() {
+		document.getElementById("tanggal").valueAsDate = new Date();
+	})
+</script>
+
+<script>
 	var base_url = '<?php echo base_url() ?>';
 </script>
 <script src="<?= base_url(); ?>assets/js/transaksi.js"></script>
+<script type="text/javascript" src="<?= base_url(); ?>assets/js/date.js"></script>
+
 
 </body>
 

@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	// var base_url = "<?= base_url(); ?>";
-	var datetime = new Date().today() + "-" + new Date().timeNow();
+	// var datetime = new Date().today() + "-" + new Date().timeNow();
 
 	// **
 	// Tambah Transaksi
@@ -13,15 +13,12 @@ $(document).ready(function () {
 		$("#item").prop("disabled", true);
 		$("#tanggal").attr("readonly", true);
 		$("#transaksi_id").val("");
-		$("#tanggal").val(datetime);
 		$("#nama").val("");
 		$("#telp").val("");
 		$("#tipe").val("");
 		$("#berat").val("");
 		$("#item").val("");
 		$("#keterangan").val("");
-
-		console.log(datetime);
 
 		$("#tipe").on("change", function () {
 			$("#berat").val("");
@@ -107,6 +104,7 @@ $(document).ready(function () {
 
 				$("#transaksi_id").val(data.transaksi_id);
 				$("#status").val(data.status);
+				$("#tanggal").attr("readonly", true);
 				$("#tanggal").val(data.tanggal);
 				$("#nama").val(data.nama_pelanggan);
 				if (data.telp == 0) {

@@ -59,5 +59,6 @@ $route['laporan-kas-masuk'] = 'laporan_kasmasuk';
 $route['laporan-kas-keluar'] = 'laporan_kaskeluar';
 $route['laporan-laba-rugi'] = 'laporan_labarugi';
 
+
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
