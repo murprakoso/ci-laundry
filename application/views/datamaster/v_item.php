@@ -24,6 +24,18 @@
 					<div class="x_content">
 						<div class="row">
 							<div class="col-sm-12">
+
+								<!-- tampilkan data -->
+								<span>Tampilkan : </span>&nbsp;
+
+								<form action="" method="get" class="d-inline">
+
+									<button type="submit" name="list" value="semua" class="btn btn-sm btn-info <?= ($active == null ? 'active' : ''); ?>">Semua</button>
+									<button type="submit" name="list" value="kilo" class="btn btn-sm btn-info <?= ($active == 2 ? 'active' : ''); ?>">Kilo</button>
+									<button type="submit" name="list" value="satuan" class="btn btn-sm btn-info <?= ($active == 1 ? 'active' : ''); ?>">Satuan</button>
+								</form>
+
+								<hr>
 								<div class="card-box table-responsive">
 									<!--  -->
 									<table id="datatable" class="table table-hover table-bordered" style="width:100%">

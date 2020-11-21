@@ -7,11 +7,21 @@ class Item_model extends CI_Model
 	private $_table = "tbl_item";
 
 	// ambil data kas masuk
-	public function getItem()
+	public function getItem($list = null)
 	{
-		$query = $this->db->order_by('item_id', 'DESC');
-		$query = $this->db->get($this->_table);
-		return $query;
+		// $query = $this->db->order_by('item_id', 'DESC');
+		// $query = $this->db->get($this->_table);
+		// return $query;
+
+		$this->db->select('*')
+			->from($this->_table);
+		// ->where('item_tipe', '');
+
+		if ($list !== null) {
+			$this->db->where('item_tipe', $list);
+		}
+
+		return $this->db->get();
 	}
 
 

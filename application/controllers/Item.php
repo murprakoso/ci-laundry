@@ -6,15 +6,29 @@ class Item extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		is_logged_in();
 		$this->load->model('Item_model');
 	}
 
 	public function index()
 	{
+		// kodisi pilih kiloan atau satuan
+		$keyword = $this->input->get('list');
+		if ($keyword == 'semua') {
+			$list = null;
+		} elseif ($keyword == 'kilo') {
+			$list = 2;
+		} elseif ($keyword == 'satuan') {
+			$list = 1;
+		} else {
+			$list = null;
+		}
+
 		$data = [
 			'title' => 'Data Item',
+			'active' => $list, // tombol aktif
 			'content' => 'datamaster/v_item',
-			'items' => $this->Item_model->getItem()
+			'items' => $this->Item_model->getItem($list)
 		];
 		$this->load->view('layout/wrapper', $data);
 	}
@@ -29,7 +43,7 @@ class Item extends CI_Controller
 		if ($this->Item_model->insertItem($nama, $tipe, $harga, $diskon)) {
 			$this->session->set_flashdata('success', 'Item berhasil ditambahkan!');
 		}
-		redirect('item');
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	public function update()
@@ -43,7 +57,7 @@ class Item extends CI_Controller
 		if ($this->Item_model->updateItem($nama, $tipe, $harga, $diskon, $itemId)) {
 			$this->session->set_flashdata('success', 'Item berhasil diupdate!');
 		}
-		redirect('item');
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 
 	public function delete($itemId)
@@ -51,7 +65,7 @@ class Item extends CI_Controller
 		if ($this->Item_model->deleteItem($itemId)) {
 			$this->session->set_flashdata('success', 'Item berhasil dihapus!');
 		}
-		redirect('item');
+		redirect($_SERVER['HTTP_REFERER']);
 	}
 }
 

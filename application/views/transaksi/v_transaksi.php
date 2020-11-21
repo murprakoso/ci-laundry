@@ -169,7 +169,10 @@
 							<div class="col-md-2">
 								<label>Tanggal</label>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 input-group">
+								<div class="input-group-prepend">
+									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
+								</div>
 								<input type="date" class="form-control" name="tanggal" id="tanggal" required>
 							</div>
 						</div>
